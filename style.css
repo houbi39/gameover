@@ -1,0 +1,245 @@
+/* ==========================================================
+   PS4 Exploit Host — bold redesign (v2)
+   Same class names / ids: only style.css changed.
+   No var()/clamp() so older console browsers keep working.
+   ========================================================== */
+*{box-sizing:border-box}
+html,body{min-height:100%;margin:0}
+
+html{
+  background:#02040a url('img.jpg') center/cover fixed no-repeat;
+  color:#fff;
+  font-family:-apple-system,"SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-text-size-adjust:100%;
+}
+
+body{
+  min-height:100vh;
+  overflow-x:hidden;
+  background:
+    radial-gradient(ellipse at 50% -10%,rgba(0,112,255,.35),transparent 55%),
+    radial-gradient(ellipse at 100% 100%,rgba(140,60,255,.22),transparent 50%),
+    linear-gradient(180deg,rgba(2,4,12,.80),rgba(2,4,12,.94));
+}
+body:before{display:none}
+
+.page{
+  width:92%;
+  max-width:720px;
+  margin:0 auto;
+  padding:56px 0 48px;
+  position:relative;
+}
+
+/* ---------- Hero ---------- */
+.hero{text-align:center;margin-bottom:34px}
+
+.brand-kicker{
+  display:inline-block;
+  padding:6px 16px;
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.16);
+  color:#cfe3ff;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:4px;
+}
+
+.hero h1{
+  margin:20px 0 8px;
+  font-size:54px;
+  font-weight:800;
+  line-height:1.05;
+  letter-spacing:-1px;
+  text-transform:none;
+  color:#fff;
+  background:-webkit-linear-gradient(90deg,#ffffff 0%,#8fd4ff 50%,#b48cff 100%);
+  background:linear-gradient(90deg,#ffffff 0%,#8fd4ff 50%,#b48cff 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:none;
+}
+
+.subtitle{
+  margin:10px 0 0;
+  color:#9db4d6;
+  font-size:16px;
+  font-weight:400;
+  letter-spacing:.3px;
+}
+
+/* ---------- Panel ---------- */
+.panel{
+  position:relative;
+  padding:28px;
+  border-radius:30px;
+  border:1px solid rgba(255,255,255,.12);
+  border-top-color:rgba(255,255,255,.28);
+  background:rgba(14,20,38,.55);
+  -webkit-backdrop-filter:blur(22px);
+  backdrop-filter:blur(22px);
+  box-shadow:0 40px 100px rgba(0,0,0,.6);
+}
+.panel:before{display:none}
+
+.section-title{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  margin:0 4px 20px;
+  color:#8da2c4;
+  font-size:12px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:3px;
+}
+.section-title span + span{margin-left:10px}
+
+.pulse{
+  display:inline-block;
+  width:8px;height:8px;
+  border-radius:50%;
+  background:#3dff8a;
+  box-shadow:0 0 0 0 rgba(61,255,138,.6);
+  -webkit-animation:pulse-ring 2s ease-out infinite;
+  animation:pulse-ring 2s ease-out infinite;
+}
+@-webkit-keyframes pulse-ring{0%{box-shadow:0 0 0 0 rgba(61,255,138,.55)}70%{box-shadow:0 0 0 10px rgba(61,255,138,0)}100%{box-shadow:0 0 0 0 rgba(61,255,138,0)}}
+@keyframes pulse-ring{0%{box-shadow:0 0 0 0 rgba(61,255,138,.55)}70%{box-shadow:0 0 0 10px rgba(61,255,138,0)}100%{box-shadow:0 0 0 0 rgba(61,255,138,0)}}
+
+/* ---------- Launcher tiles ---------- */
+.button-grid{
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  max-width:none;
+  margin:0;
+}
+.button-grid a{display:block;text-decoration:none}
+
+.btn{
+  position:relative;
+  display:block;
+  width:100%;
+  min-height:76px;
+  padding:16px 44px 16px 22px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:20px;
+  background:rgba(255,255,255,.06);
+  color:#fff;
+  font-family:inherit;
+  font-size:17px;
+  font-weight:600;
+  letter-spacing:.2px;
+  text-align:left;
+  cursor:pointer;
+  outline:none;
+  box-shadow:inset 4px 0 0 #2f8bff,0 8px 24px rgba(0,0,0,.25);
+  -webkit-tap-highlight-color:transparent;
+  transition:transform .2s ease,background .2s ease,border-color .2s ease,box-shadow .2s ease;
+}
+.btn:after{
+  content:"\203A";
+  position:absolute;
+  right:20px;top:50%;
+  margin-top:-17px;
+  font-size:30px;
+  line-height:34px;
+  color:rgba(255,255,255,.45);
+  transition:transform .2s ease,color .2s ease;
+}
+.btn:hover,.btn:focus{
+  transform:translateY(-3px);
+  background:rgba(47,139,255,.18);
+  border-color:rgba(120,190,255,.55);
+  box-shadow:inset 4px 0 0 #6bb6ff,0 16px 36px rgba(0,100,255,.28);
+}
+.btn:hover:after,.btn:focus:after{color:#fff;-webkit-transform:translateX(4px);transform:translateX(4px)}
+.btn:active{-webkit-transform:scale(.98);transform:scale(.98)}
+
+/* Featured: Multi FW (full width, gold) */
+.button-grid > .btn-multi{
+  grid-column:1 / -1;
+  min-height:92px;
+  font-size:20px;
+  background:-webkit-linear-gradient(135deg,rgba(255,196,60,.30),rgba(255,140,0,.10));
+  background:linear-gradient(135deg,rgba(255,196,60,.30),rgba(255,140,0,.10));
+  border-color:rgba(255,210,100,.55);
+  box-shadow:inset 4px 0 0 #ffc83c,0 12px 34px rgba(255,170,0,.18);
+}
+.btn-multi:hover,.btn-multi:focus{
+  background:linear-gradient(135deg,rgba(255,196,60,.42),rgba(255,140,0,.18));
+  border-color:#ffe29a;
+  box-shadow:inset 4px 0 0 #ffe08a,0 18px 40px rgba(255,170,0,.32);
+}
+
+/* Restore (full width, red) */
+.button-grid > .btn-restore{
+  grid-column:1 / -1;
+  background:rgba(255,60,70,.10);
+  border-color:rgba(255,100,100,.35);
+  box-shadow:inset 4px 0 0 #ff4a5a,0 8px 24px rgba(0,0,0,.25);
+}
+.btn-restore:hover,.btn-restore:focus{
+  background:rgba(255,60,70,.22);
+  border-color:#ff8a92;
+  box-shadow:inset 4px 0 0 #ff7a86,0 16px 36px rgba(255,60,70,.28);
+}
+
+/* Secondary page buttons */
+.btn-onln{box-shadow:inset 4px 0 0 #3dff8a,0 8px 24px rgba(0,0,0,.25)}
+.btn-toolbox{box-shadow:inset 4px 0 0 #b48cff,0 8px 24px rgba(0,0,0,.25)}
+.btn-alt{box-shadow:inset 4px 0 0 #6bb6ff,0 8px 24px rgba(0,0,0,.25)}
+
+.btn-donate{
+  display:block;
+  width:100%;
+  max-width:460px;
+  margin:26px auto 0;
+  box-shadow:inset 4px 0 0 #3dff8a,0 8px 24px rgba(0,0,0,.25);
+}
+
+/* ---------- Credits ---------- */
+.credits{
+  position:relative;
+  margin:26px auto 0;
+  padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.08);
+  color:#6f84a6;
+  font-size:13px;
+  line-height:1.7;
+  text-align:center;
+}
+.credits a{color:#8fd4ff;text-decoration:none;font-weight:700}
+.credits a:hover{text-decoration:underline}
+
+/* ---------- Other pages' helpers (kept) ---------- */
+#crypto{display:none;position:relative}
+#menu.is-hidden{display:none}
+.donation{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:760px;margin:0 auto 22px}
+.coin{padding:20px;text-align:center;border:1px solid rgba(255,255,255,.12);border-radius:20px;background:rgba(0,0,0,.3)}
+.coin h2{margin:0 0 15px;font-size:16px}
+.coin img{display:block;width:150px;height:150px;max-width:100%;margin:0 auto 15px;border-radius:12px}
+.coin code{display:block;color:#cdefff;font-size:11px;line-height:1.5;word-break:break-all}
+.btn-return{display:block;max-width:300px;margin:0 auto}
+
+/* ---------- Responsive ---------- */
+@media (max-width:560px){
+  html{background-attachment:scroll}
+  .page{padding-top:32px}
+  .hero h1{font-size:38px}
+  .subtitle{font-size:14px}
+  .panel{padding:18px 14px;border-radius:24px}
+  .button-grid{grid-template-columns:1fr;gap:10px}
+  .btn{min-height:68px;font-size:16px}
+  .donation{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  .btn,.btn:after{transition:none}
+  .pulse{-webkit-animation:none;animation:none}
+}
