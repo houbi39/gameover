@@ -243,3 +243,8 @@ body:before{display:none}
   .btn,.btn:after{transition:none}
   .pulse{-webkit-animation:none;animation:none}
 }
+
+
+/* External Payloads page link */
+.btn-payloads{box-shadow:inset 4px 0 0 #3dff8a,0 8px 24px rgba(0,0,0,.25)}
+.btn-payloads:hover,.btn-payloads:focus{border-color:#3dff8a;box-shadow:inset 4px 0 0 #3dff8a,0 16px 36px rgba(61,255,138,.2)}
