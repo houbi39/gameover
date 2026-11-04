@@ -3,9 +3,12 @@ CACHE MANIFEST
 CACHE:
 ../img.jpg
 ../style.css
-goldhen_2.4b18.12.bin
+goldhen.bin
 index.html
 slopkit\chain_lapse.js
+slopkit\patches\1400.bin
+slopkit\jb2.js
+slopkit\afterglow.js
 slopkit\chain_poops.js
 slopkit\core.js?v=10
 slopkit\core.js
