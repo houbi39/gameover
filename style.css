@@ -16,10 +16,7 @@ html{
 body{
   min-height:100vh;
   overflow-x:hidden;
-  background:
-    radial-gradient(ellipse at 50% -10%,rgba(0,112,255,.35),transparent 55%),
-    radial-gradient(ellipse at 100% 100%,rgba(140,60,255,.22),transparent 50%),
-    linear-gradient(180deg,rgba(2,4,12,.80),rgba(2,4,12,.94));
+  background:transparent;
 }
 body:before{display:none}
 
