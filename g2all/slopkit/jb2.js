@@ -1156,6 +1156,13 @@ let allDone = false,
       allDone = true;
       try { clearInterval(watchdog); } catch (e) {}
       finishUI(agOk);
+      // Only mark session done on success. On failure the user must be able
+      // to reopen the browser and retry without seeing "Already Loaded".
+      if (agOk) {
+        try {
+          sessionStorage.setItem(SESSION_DONE_KEY, "1");
+        } catch (e) {}
+      }
       // Swap the address out. The browser restores the last one after a
       // reload, and an enabler that restarts SceShellUI causes exactly that
       // reload -- so the last address must not be the one that runs the
@@ -1164,9 +1171,6 @@ let allDone = false,
       // well as at a root. The marker tells that page to hold its autostart;
       // without it the restored landing page would count down and run the
       // whole chain a second time on an already patched kernel.
-      try {
-        sessionStorage.setItem(SESSION_DONE_KEY, "1");
-      } catch (e) {}
       /* Only rewrite the URL bar — do NOT navigate/reload (would OOM). */
       try {
         history.replaceState(null, "", "index.html");
