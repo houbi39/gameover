@@ -1,5 +1,6 @@
+# GameOver 14.02 chain cache refresh
 CACHE MANIFEST 
-# GoldHEN payload refresh 2026-11-13 SHA256 e4157533ef7a7e220c5febf59d7e6e3eb2c70f97009f1fa6d4e7bec42b4cbddc
+# GoldHEN payload: Telegram Desktop user-modified build SHA256 7d1d13a86ea4a140564bf0efb1c0b6df0ff34d7071c2b5c117678fc43d5281b5
 
 CACHE:
 ../img.jpg
@@ -26,5 +27,12 @@ slopkit\patches\1302.bin
 slopkit\patches\1350.bin
 slopkit\patches\1352.bin
 
+slopkit\1402\afterglow.js
+slopkit\1402\core.js
+slopkit\1402\int64.js
+slopkit\1402\jb2.js
+slopkit\1402\mem.js
+slopkit\1402\ps4_offsets.js
+slopkit\patches\1402.bin
 NETWORK:
 *
