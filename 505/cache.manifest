@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# GAMEOVER-CACHE-VERSION: 36cf879ac1f75f3966330b3c01beb59e5b213818359eb6714cd0a03cac856892
+# GAMEOVER-CACHE-VERSION: 435f6b58d2b19edff58d2ec00fc4a6808d390ff6c509330ec45fa20cb9d0f558
 # GoldHEN payload refresh 2026-11-13 SHA256 e4157533ef7a7e220c5febf59d7e6e3eb2c70f97009f1fa6d4e7bec42b4cbddc
 CACHE:
 goldhen.bin
@@ -25,7 +25,7 @@ fan-threshold75.bin
 ftp.bin
 goldhen_2.3_505.bin
 goldhen_2.4b18.12.bin
-index.html
+./
 kernel-dumper.bin
 Lamance-v0.9-1.38.bin
 Orbis-Toolbox-505.bin

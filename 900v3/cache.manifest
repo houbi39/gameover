@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# GAMEOVER-CACHE-VERSION: b3e7ef997546f941ef8c0bb5de377dd6844f51ccff8b72ce0d22ae39186dc12e
+# GAMEOVER-CACHE-VERSION: 73e2c5197448484fb6409784e2db8e310a10bf3e5cadd3e3d6fc9ebae4624857
 # GoldHEN payload refresh 2026-11-13 SHA256 e4157533ef7a7e220c5febf59d7e6e3eb2c70f97009f1fa6d4e7bec42b4cbddc
 
 CACHE:
@@ -31,7 +31,7 @@ ftp.bin
 goldhen_2.3.bin
 goldhen_2.4b18.12.bin
 history-blocker.bin
-index.html
+./
 int64.js
 jbc_loader.js
 kernel-dumper.bin
@@ -60,7 +60,7 @@ southbridge.bin
 syscalls.js
 syscalls2.js
 todex.bin
-webactivator.html
+webactivator
 webkit.js
 webrte.bin
 

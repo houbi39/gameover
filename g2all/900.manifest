@@ -1,12 +1,12 @@
 CACHE MANIFEST
-# GAMEOVER-CACHE-VERSION: 40185108ed5b302c0a91953d403622ae7df40c3359416050662d207a76660b63
+# GAMEOVER-CACHE-VERSION: 5bbc2000caf3d3e6167550b9728fb9eca08776b743b665e1eb3bcea690161ad4
 # GoldHEN payload refresh 2026-11-13 SHA256 e4157533ef7a7e220c5febf59d7e6e3eb2c70f97009f1fa6d4e7bec42b4cbddc
 
 CACHE: 
 ../img.jpg
 ../style.css
 goldhen.bin
-index.html
+./
 900\alert.js
 900\config.js
 900\lapse.js

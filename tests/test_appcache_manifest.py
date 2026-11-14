@@ -25,6 +25,18 @@ class AppCacheManifestTests(unittest.TestCase):
             second = manifest_digest(root, manifest, text)
             self.assertNotEqual(first, second)
 
+    def test_manifest_digest_changes_when_public_cache_url_changes(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / 'index.html').write_text('same page')
+            manifest = root / 'cache.manifest'
+            old = 'CACHE MANIFEST\nCACHE:\nindex.html\n'
+            clean = 'CACHE MANIFEST\nCACHE:\n./\n'
+            self.assertNotEqual(
+                manifest_digest(root, manifest, old),
+                manifest_digest(root, manifest, clean),
+            )
+
     def test_manifest_version_is_updated_deterministically(self):
         old = 'CACHE MANIFEST\n# old version\nCACHE:\nasset.js\n'
         updated = update_manifest_text(old, 'a' * 64)
@@ -56,6 +68,32 @@ class AppCacheManifestTests(unittest.TestCase):
         source = (root / '672goldhen/index.html').read_text(encoding='utf-8')
         error_handler = source.split('window.applicationCache.onerror=', 1)[1].split(';', 1)[0]
         self.assertNotIn('cached672="yes"', error_handler)
+
+    def test_directory_route_resolves_to_index_html_for_cloudflare_pages(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / 'index.html').write_text('landing page')
+            manifest = root / 'cache.manifest'
+            text = 'CACHE MANIFEST\nCACHE:\n./\n'
+            self.assertEqual(len(manifest_digest(root, manifest, text)), 64)
+
+    def test_extensionless_html_route_resolves_to_html_file(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / 'webactivator.html').write_text('activation page')
+            manifest = root / 'cache.manifest'
+            text = 'CACHE MANIFEST\nCACHE:\nwebactivator\n'
+            self.assertEqual(len(manifest_digest(root, manifest, text)), 64)
+
+    def test_manifests_use_cloudflare_clean_urls_for_html_cache_entries(self):
+        root = Path(__file__).resolve().parents[1]
+        for manifest in root.rglob('*.manifest'):
+            with self.subTest(manifest=manifest.relative_to(root)):
+                entries = parse_cache_entries(manifest.read_text(encoding='utf-8'))
+                self.assertFalse(
+                    [entry for entry in entries if entry.lower().endswith('.html')],
+                    f'{manifest.relative_to(root)} contains HTML URLs that Cloudflare redirects',
+                )
 
     def test_query_path_must_exist_after_query_is_removed(self):
         with tempfile.TemporaryDirectory() as tmp:

@@ -43,6 +43,17 @@ def _asset_path(root: Path, manifest: Path, entry: str) -> Path:
     base = root.resolve()
     if target != base and base not in target.parents:
         raise ValueError(f'CACHE entry escapes repository root in {manifest}: {entry}')
+
+    # Cloudflare Pages serves directory index files and .html files through
+    # clean URLs. Manifests must request those public URLs directly (no 308),
+    # while the local digest still needs to hash the underlying HTML file.
+    if target.is_dir():
+        target = (target / 'index.html').resolve()
+    elif not target.is_file() and not target.suffix:
+        target = target.with_suffix('.html').resolve()
+
+    if target != base and base not in target.parents:
+        raise ValueError(f'CACHE entry escapes repository root in {manifest}: {entry}')
     if not target.is_file():
         raise FileNotFoundError(f'Missing CACHE entry in {manifest}: {entry} -> {target}')
     return target
@@ -53,6 +64,10 @@ def manifest_digest(root: Path, manifest: Path, text: str) -> str:
     for entry in parse_cache_entries(text):
         asset = _asset_path(root, manifest, entry)
         relative = asset.relative_to(root.resolve()).as_posix()
+        # Include the public URL entry as well as the resolved local asset so
+        # a clean-URL change invalidates the manifest version deterministically.
+        digest.update(entry.encode('utf-8'))
+        digest.update(b'\0')
         digest.update(relative.encode('utf-8'))
         digest.update(b'\0')
         digest.update(asset.read_bytes())
