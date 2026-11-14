@@ -8,7 +8,7 @@
 <script>
 history.replaceState(null,null,'index.html');var histlength=history.length;history.go(-histlength);
 function DLProgress(e){Percent=(Math.round(e.loaded / e.total * 100));setTimeout(function(){window.msgs.innerHTML="Installing Offline Cache: " + Percent + "%";},500)}
-function DisplayCacheProgress(){setTimeout(function(){window.msgs.innerHTML="Cache Installed Successfully ✔";},1500);setTimeout(function(){window.msgs.innerHTML="Now Close And Re-Open Your Browser ...";},3500);}window.applicationCache.addEventListener("progress",DLProgress,false);window.applicationCache.oncached=function(e){DisplayCacheProgress();};window.applicationCache.onupdateready=function(e){DisplayCacheProgress();};
+function DisplayCacheProgress(){setTimeout(function(){window.msgs.innerHTML="Cache Installed Successfully ✔";},1500);setTimeout(function(){window.msgs.innerHTML="Now Close And Re-Open Your Browser ...";},3500);}window.applicationCache.addEventListener("progress",DLProgress,false);window.applicationCache.oncached=function(e){DisplayCacheProgress();};function ActivateCacheUpdate(){try{window.applicationCache.swapCache();}catch(e){window.msgs.innerHTML="Cache downloaded but activation failed. Close and re-open the browser, then retry.";return;}DisplayCacheProgress();}window.applicationCache.onupdateready=ActivateCacheUpdate;if(window.applicationCache.status==window.applicationCache.UPDATEREADY)ActivateCacheUpdate();window.applicationCache.onerror=function(){window.msgs.innerHTML="Cache update failed. The previous cache is still active. Check the connection and retry.";};
 </script>
 <h1>PS4 9.00 FW GoldHEN Host</h1>
 <hr>
