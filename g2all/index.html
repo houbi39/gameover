@@ -30,7 +30,12 @@ if (!isPS4) {
             window.location.replace("cache900.html");
         } else if (fwNum >= 10.00 && fwNum <= 11.02) {
             window.location.replace("cachecss.html");
-        } else if (fwNum >= 11.50 && fwNum <= 14.02) {
+        } else if (
+            (fwNum >= 11.50 && fwNum <= 12.02) ||
+            (fwNum >= 12.50 && fwNum <= 13.00) ||
+            (fwNum >= 13.02 && fwNum <= 13.52) ||
+            fwNum == 14.00 || fwNum == 14.02
+        ) {
             window.location.replace("cacheslopkit.html");
         } else {
             document.addEventListener("DOMContentLoaded", () => {
@@ -103,6 +108,11 @@ if (!isPS4) {
             script.src = "slopkit/jb2.js";
             script.onerror = onScriptError;
             document.head.appendChild(script);
+        }
+        else {
+            document.addEventListener("DOMContentLoaded", () => {
+                msgs.innerHTML = 'Unsupported Firmware: <span style="color: red;">' + fwVersion + '</span>';
+            });
         }
     }
 }
