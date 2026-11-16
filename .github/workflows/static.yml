@@ -35,6 +35,12 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Run exploit-chain regression tests
+        run: node --experimental-default-type=module --test tests/test_exploit_chain_regressions.mjs
       - name: Regenerate and validate AppCache manifests
         run: |
           python scripts/update_appcache_manifests.py

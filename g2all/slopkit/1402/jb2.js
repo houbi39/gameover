@@ -1,7 +1,7 @@
 import { establishPrimitive } from "./core.js";
 import { installWindowP, pairStatus } from "./mem.js";
 import { int64 } from "./int64.js";
-import { offsetsFor, PS4 } from "./ps4_offsets.js";
+import { offsetsFor, PS4, validateWebkitProfile } from "./ps4_offsets.js";
 
 function ensureHostConsole() {
   var hide =
@@ -463,6 +463,22 @@ let mainMf = null,
       return;
     }
     const fwKey = key || "unknown";
+
+    /* 14.02 inherits its WebKit profile from 14.00. Refuse a partial table
+       before deriving any module address; byte-signature checks below remain
+       mandatory and are the actual runtime validation of those offsets. */
+    if (fwKey === "14.02") {
+      const webkitProfile = validateWebkitProfile(off);
+      if (!check(
+        "webkit-offset-profile-complete",
+        webkitProfile.ok,
+        "missing=[" + webkitProfile.missing.join(",") + "]",
+      )) {
+        endWatchdog();
+        finishUI(false, false);
+        return;
+      }
+    }
 
     /* afterglow carries one kernel stage per firmware, and nothing below
        re-checks the key. On a firmware it has no stage for, the chain would

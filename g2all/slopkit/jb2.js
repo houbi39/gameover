@@ -301,13 +301,15 @@ if (SHOW_LOG && !SENT_HOME && document.body) {
     if (ram) ram.setAttribute("style", HIDE_STYLE);
   } catch (e) {}
 }
-function finishUI(ok) {
+function finishUI(ok, ran) {
   if (alreadyLoaded) {
     hostAlready();
   } else if (ok) {
     hostOk();
-  } else {
+  } else if (ran) {
     hostFail();
+  } else {
+    hostRetry();
   }
   if (!document.body || SHOW_LOG) return;
   document.body.className = ok || alreadyLoaded ? "done" : "fail";
@@ -1131,7 +1133,7 @@ let allDone = false,
       /* Arming requires a step from the landing page. A probe
          (afterglow=probe) fires no trigger and patches nothing, so a restored
          page may run that. */
-      let agOk = false;
+      let agOk = false, agRan = false;
       try {
         const ag = await import("./afterglow.js");
         // Exactly what afterglow reaches for, counted rather than guessed.
@@ -1139,13 +1141,17 @@ let allDone = false,
           p: p, callAddr: callAddr, bufAddr: bufAddr, errno: errno,
           params: params, keepAlive: keepAlive, mark: mark, state: state,
           libkernelBase: libkernelBase, webkitBase: webkitBase,
-          stubAddr: stubAddr, off: off,
+          stubAddr: stubAddr, off: off, fw: fwKey,
           prepareMany: prepareMany, runPrepared: runPrepared,
         };
         if (params.get("afterglow") === "probe") {
-          ag.probeAfterglow(agCtx);
-          agOk = true;
+          const probed = ag.probeAfterglow(agCtx);
+          agOk = !!(probed && probed.ok);
         } else {
+          // Set before entering the kernel stage: an exception may occur
+          // after the attempt has begun and must not be reported as a harmless
+          // WebKit-only miss.
+          agRan = true;
           const res = await ag.runAfterglow(agCtx);
           agOk = !!res;
         }
@@ -1155,7 +1161,7 @@ let allDone = false,
       }
       allDone = true;
       try { clearInterval(watchdog); } catch (e) {}
-      finishUI(agOk);
+      finishUI(agOk, agRan);
       // Only mark session done on success. On failure the user must be able
       // to reopen the browser and retry without seeing "Already Loaded".
       if (agOk) {

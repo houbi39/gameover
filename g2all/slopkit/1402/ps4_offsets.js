@@ -675,11 +675,51 @@ PS4["14.00"] = Object.assign({}, PS4["13.52"], {
   k_rootvnode: undefined,
 });
 
+/* Upstream hardware report: well0nez/afterglow-web@3f1c87d9ba2e783c393d2eaa54900e7bf81fe484 (2026-11-08). */
 PS4["14.02"] = Object.assign({}, PS4["14.00"], {
   fw_status:
-    "state=14.02 webkit=inherited-from-14.00 (unmeasured, checked at runtime) " +
-    "kernel=afterglow (apm-UAF, own kernel stage) payload=hen.bin|goldhen.bin",
+    "state=14.02 webkit=14.00-profile-inherited (15 gadget signatures checked at runtime; " +
+    "upstream hardware pass reported 2026-11-08) " +
+    "kernel=afterglow-14.02 (firmware-specific table) payload=hen.bin|goldhen.bin",
 });
+
+/* 14.02 deliberately inherits the 14.00 WebKit profile. Keep a complete
+ * preflight list here so a partial or accidentally edited profile is refused
+ * before any WebKit address is derived. The runtime still has to verify all
+ * 15 gadget byte signatures; completeness alone never authorizes the chain.
+ */
+export const WEBKIT_REQUIRED_OFFSETS = Object.freeze([
+  "wk_expm1_builtin",
+  "wk_JSFunction_m_function",
+  "wk___imp___error",
+  "k__error",
+  "wk_POP_RDI_RET",
+  "wk_POP_RSI_RET",
+  "wk_POP_RDX_RET",
+  "wk_POP_RCX_RET",
+  "wk_POP_RAX_RET",
+  "wk_POP_R8_RET",
+  "wk_POP_R9_RET",
+  "wk_LEAVE_RET",
+  "wk_MOV_QWORD_PTR_RDI_RAX_RET",
+  "wk_MOV_RDI_RSI_30_CALL",
+  "wk_POP_RAX_MOV_RAX_JMP_18",
+  "wk_PUSH_RBP_MOV_RBP_RSP_10",
+  "wk_MOV_RDI_RAX_8_CALL_20",
+  "wk_MOV_RDX_RAX_18_CALL_10",
+  "wk_PUSH_RDX_POP_RSP_RET",
+  "pivot_view_sp",
+  "wk_ArrayBuffer_m_impl",
+  "wk_ArrayBuffer_m_contents_m_data",
+  "k_scan_stage1",
+]);
+
+export function validateWebkitProfile(off) {
+  const missing = WEBKIT_REQUIRED_OFFSETS.filter(
+    (key) => !off || !Number.isSafeInteger(off[key]) || off[key] <= 0,
+  );
+  return { ok: missing.length === 0, missing };
+}
 
 export function offsetsFor(uaString) {
   const m = (uaString || "").match(/PlayStation\s+4[\/ ](\d+)\.(\d+)/);
