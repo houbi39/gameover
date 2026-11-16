@@ -6,7 +6,7 @@ if (main_ret == 179 || main_ret == 0){
 } 
 else {
 	localStorage.failcount = ++localStorage.failcount;window.failCounter.innerHTML=localStorage.failcount;
-	window.msgs.innerHTML="<h1>Failed to Load Jailbreak! - Restart your Console.</h1>";
+	window.msgs.innerHTML="<h1>تعذّر تنفيذ الجيلبريك. أعد تشغيل الجهاز ثم حاول مجدداً.</h1>";
 	return;
 }
 }

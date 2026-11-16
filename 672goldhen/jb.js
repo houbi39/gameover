@@ -13,6 +13,6 @@ if (main_ret == 179 || main_ret == 0){
     } 
 	else {
 	localStorage.failcount = ++localStorage.failcount;window.failCounter.innerHTML=localStorage.failcount;
-	window.msgs.innerHTML="Failed to Load! - Restart your Console.";
+	window.msgs.innerHTML="تعذّر التحميل. أعد تشغيل الجهاز ثم حاول مجدداً.";
     }
 }

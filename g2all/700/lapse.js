@@ -1712,7 +1712,7 @@ export async function kexploit() {
   }
 
   if (localStorage.ExploitLoaded === "yes" && sessionStorage.ExploitLoaded != "yes") {
-    msgs.innerHTML = "GoldHEN is Already Loaded ...";
+    msgs.innerHTML = "GoldHEN يعمل بالفعل";
     return new Promise(() => {});
   }
 
@@ -1876,7 +1876,7 @@ function runPayload(path) {
 }
 
 function hostFail() {
-    msgs.innerHTML = "Failed to Load! Restart Your Console ...";
+    msgs.innerHTML = "تعذّر التحميل. أعد تشغيل الجهاز ثم حاول مجدداً.";
     msgs.style.color = "yellow";
 }
 
@@ -1884,7 +1884,7 @@ kexploit().then(() => {
     setTimeout(() => {
         try {
             runPayload("./goldhen.bin");
-            msgs.innerHTML = "GoldHEN Loaded ...";
+            msgs.innerHTML = "تم تحميل GoldHEN بنجاح";
         } catch (e) {
             hostFail();
         }

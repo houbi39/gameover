@@ -32,14 +32,14 @@ const STOP_BEFORE_DOUBLE = params.get("stop") === "beforedouble";
 function hostOk() {
   var m = document.getElementById("msgs");
   if (m) {
-    m.innerHTML = "GoldHEN Loaded ...";
+    m.innerHTML = "تم تحميل GoldHEN بنجاح";
   }
 }
 
 function hostFail() {
   var m = document.getElementById("msgs");
   if (m) {
-    m.innerHTML = "Failed to Load! Restart Your Console ...";
+    m.innerHTML = "تعذّر التحميل. أعد تشغيل الجهاز ثم حاول مجدداً.";
     m.style.color = "yellow";
   }
 }
@@ -47,7 +47,7 @@ function hostFail() {
 function hostAlready() {
   var m = document.getElementById("msgs");
   if (m) {
-    m.innerHTML = "GoldHEN is Already Loaded ...";
+    m.innerHTML = "GoldHEN يعمل بالفعل";
   }
 }
 
@@ -195,7 +195,7 @@ let allDone = false,
     mark("BUILD", "jb=skipjb2 base=ef1670a");
     mark("FW", key || "(not a PS4 UA)");
     if (!off) {
-      state("no offsets for this firmware", "bad");
+      state("لا تتوفر بيانات هذا الإصدار من النظام", "bad");
       return;
     }
     const fwKey = key || "unknown";
@@ -340,7 +340,7 @@ let allDone = false,
     if (retryCount() > 0)
       mark("AUTO-RELOAD-RESUME", "reload=" + retryCount() + "/" + RETRY_MAX);
 
-    state("running the primitive...", "warn");
+    state("جارٍ تشغيل مكوّن الاستغلال...", "warn");
     await new Promise((r) => setTimeout(r, 0));
 
     const PRIMITIVE_LOUD = /FAIL|ERROR|THREW|RETRY|ABORT|PASS/i;
@@ -3824,7 +3824,7 @@ let allDone = false,
     }
   } catch (e) {
     mark("THREW", e && e.message ? e.message : String(e));
-    state("threw", "bad");
+    state("حدث استثناء", "bad");
   } finally {
     try {
       if (jbRestoreHook) jbRestoreHook("finally");

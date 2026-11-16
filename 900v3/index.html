@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 <head>
-<title>PS4 9.00 FW Host v3.0 | Automatic Exploitation</title>
+<meta charset="UTF-8">
+<title>مضيف PS4 لإصدار 9.00 - النسخة 3.0 (تشغيل تلقائي)</title>
 <link rel="stylesheet" href="../style.css">
 <script src="int64.js"></script>
 <script src="rop.js"></script>
@@ -12,96 +13,96 @@
 <script>
 if (window.applicationCache.status=='0'){window.location.replace("cache.html");}
 </script>
-<h1 id="msgs">PS4 9.00 FW Host v3.0</h1>
+<h1 id="msgs">مضيف PS4 لإصدار 9.00 - النسخة 3.0</h1>
 <hr>
 <br>
 <div id="progress">
-<h1 id="msgs2" style="font-size: 30px;margin-top: 77px;margin-bottom: 412px;">Loading Jailbreak... Please Wait</h1>
+<h1 id="msgs2" style="font-size: 30px;margin-top: 77px;margin-bottom: 412px;">جارٍ تنفيذ الجيلبريك... يرجى الانتظار</h1>
 </div>
 <div id="menu" style="display: none">
-<h1 style="font-size: 18px;color: yellow;">Main Payloads</h1>
-<button class="btn" onmouseover="msgs.innerHTML='GoldHEN Fix for 9.00 FW'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_goldhenbeta()"> GoldHEN Fix </button>
-<button class="btn" onmouseover="msgs.innerHTML='GoldHEN Fix for 9.00 FW'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_goldhen23()"> GoldHEN Fix </button>
-<button class="btn" onmouseover="msgs.innerHTML='Send a Payload using port 9020'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_binloader()"> Bin Loader </button>
+<h1 style="font-size: 18px;color: yellow;">الحمولات الرئيسية</h1>
+<button class="btn" onmouseover="msgs.innerHTML='إصلاح GoldHEN لإصدار 9.00'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_goldhenbeta()"> إصلاح GoldHEN </button>
+<button class="btn" onmouseover="msgs.innerHTML='إصلاح GoldHEN لإصدار 9.00'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_goldhen23()"> إصلاح GoldHEN </button>
+<button class="btn" onmouseover="msgs.innerHTML='أرسل الحمولة إلى المنفذ 9020'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_binloader()"> محمّل الحمولات </button>
 <br>
-<h1 style="font-size: 18px;">Payloads</h1>
-<button class="btn" onmouseover="msgs.innerHTML='Dump Game Only to USB Drive'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_Gdumper()"> Game-Dumper </button>
-<button class="btn" onmouseover="msgs.innerHTML='Dump Update Only to USB Drive'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_Udumper()"> Update-Dumper </button>
-<button class="btn" onmouseover="msgs.innerHTML='Dump Separate Game and Update to USB Drive'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_SGUdumper()"> SGU-Dumper </button>
-<button class="btn" onmouseover="msgs.innerHTML='Dump Merged Game and Update to USB Drive'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_MGUdumper()"> MGU-Dumper </button>
+<h1 style="font-size: 18px;">الحمولات</h1>
+<button class="btn" onmouseover="msgs.innerHTML='انسخ اللعبة فقط إلى وحدة USB'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_Gdumper()"> استخراج الألعاب </button>
+<button class="btn" onmouseover="msgs.innerHTML='انسخ التحديث فقط إلى وحدة USB'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_Udumper()"> استخراج التحديثات </button>
+<button class="btn" onmouseover="msgs.innerHTML='انسخ اللعبة والتحديث كلّاً على حدة إلى وحدة USB'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_SGUdumper()"> استخراج اللعبة والتحديث منفصلين </button>
+<button class="btn" onmouseover="msgs.innerHTML='انسخ اللعبة والتحديث معاً إلى وحدة USB'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_MGUdumper()"> استخراج اللعبة والتحديث معاً </button>
 <br>
-<button class="btn" onmouseover="msgs.innerHTML='Enable Some Debugging Functions Available on TestKit'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_todex()"> ToDex </button>
-<a href="webactivator.html"><button class="btn" onmouseover="msgs.innerHTML='Activate Your User Account from the Console Browser'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'"> Web-Activator </button></a>
-<button class="btn" onmouseover="msgs.innerHTML='Access this console Through FTP (Be careful what you do)'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_ftp()"> FTP </button>
-<button class="btn" onmouseover="msgs.innerHTML='Transfer Installed Games to USB Drive in exFAT'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_app2usb()"> App2USB </button>
-<button class="btn" onmouseover="msgs.innerHTML='Create a Backup of the Database and Users to a USB Drive'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_dbackup()"> DB Backup </button>
-<button class="btn" onmouseover="msgs.innerHTML='Restore a Backup of the Database and Users from a USB Drive'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_dbrestore()"> DB Restore </button>
+<button class="btn" onmouseover="msgs.innerHTML='تفعيل بعض وظائف التصحيح المتاحة في TestKit'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_todex()"> ToDex </button>
+<a href="webactivator.html"><button class="btn" onmouseover="msgs.innerHTML='تفعيل حساب المستخدم من متصفح الجهاز'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'"> تفعيل الحساب عبر المتصفح </button></a>
+<button class="btn" onmouseover="msgs.innerHTML='الوصول إلى الجهاز عبر FTP (انتبه لما تقوم به)'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_ftp()"> FTP </button>
+<button class="btn" onmouseover="msgs.innerHTML='انقل الألعاب المثبّتة إلى وحدة USB بنظام exFAT'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_app2usb()"> App2USB </button>
+<button class="btn" onmouseover="msgs.innerHTML='احفظ نسخة من قاعدة البيانات والمستخدمين على وحدة USB'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_dbackup()"> نسخ قاعدة البيانات احتياطياً </button>
+<button class="btn" onmouseover="msgs.innerHTML='استعد قاعدة البيانات والمستخدمين من وحدة USB'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_dbrestore()"> استعادة قاعدة البيانات </button>
 <br>
-<button class="btn" onmouseover="msgs.innerHTML='Enable System Updates'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_enablebUpdates()"> Enable Updates </button>
-<button class="btn" onmouseover="msgs.innerHTML='Disable System Updates'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_disableUpdates()"> Disable Updates </button>
-<button class="btn" onmouseover="msgs.innerHTML='Enable/Disable Browser History.'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_historyBlocker()"> History Blocker </button>
-<button class="btn" onmouseover="msgs.innerHTML='Dump a Console Kernel to a USB Drive'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_kernelDump()"> Kernel Dumper </button>
-<button class="btn" onmouseover="msgs.innerHTML='Dump a Kernel Module to a USB Drive'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_moduleDump()"> Module Dumper </button>
-<button class="btn" onmouseover="msgs.innerHTML='PS4 Debug for 9.00 FW'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_ps4debug()"> PS4 Debug </button>
+<button class="btn" onmouseover="msgs.innerHTML='تفعيل تحديثات النظام'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_enablebUpdates()"> تفعيل التحديثات </button>
+<button class="btn" onmouseover="msgs.innerHTML='إيقاف تحديثات النظام'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_disableUpdates()"> إيقاف التحديثات </button>
+<button class="btn" onmouseover="msgs.innerHTML='تفعيل سجل المتصفح أو إيقافه'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_historyBlocker()"> منع سجل التصفح </button>
+<button class="btn" onmouseover="msgs.innerHTML='احفظ نسخة من نواة الجهاز على وحدة USB'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_kernelDump()"> استخراج النواة </button>
+<button class="btn" onmouseover="msgs.innerHTML='احفظ وحدة من النواة على وحدة USB'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_moduleDump()"> استخراج وحدات النواة </button>
+<button class="btn" onmouseover="msgs.innerHTML='أدوات تصحيح PS4 لإصدار 9.00'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_ps4debug()"> تصحيح PS4 </button>
 <br>
-<button class="btn" onmouseover="msgs.innerHTML='Disables the ASLR (Address space layout randomization)'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_disbAslr()"> Disable ASLR </button>
-<button class="btn" onmouseover="msgs.innerHTML='Disable IDU Mode if you have activated it by mistake'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_exitidu()"> Exit IDU </button>
-<button class="btn" onmouseover="msgs.innerHTML='Renames (fake) RIFs to (free) RIFs'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_rifRen()"> RIF Renamer </button>
-<button class="btn" onmouseover="msgs.innerHTML='Permanent UART for 9.00 FW'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_permUart()"> Permanent UART </button>
-<button class="btn" onmouseover="msgs.innerHTML='Required to Activate Cheats Through the PS4 Trainer Website'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_webrte()"> WebRTE </button>
-<a href="http://ps4trainer.com/Trainer/index.html"><button class="btn btn-onln" onmouseover="msgs.innerHTML='PS4 Trainer Website (Follow Instructions There)'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'"> PS4 Trainer Web </button></a>
+<button class="btn" onmouseover="msgs.innerHTML='إيقاف ASLR (عشوائية تخطيط الذاكرة)'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_disbAslr()"> إيقاف ASLR </button>
+<button class="btn" onmouseover="msgs.innerHTML='أوقف وضع IDU إذا فعّلته عن طريق الخطأ'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_exitidu()"> الخروج من وضع IDU </button>
+<button class="btn" onmouseover="msgs.innerHTML='يحوّل ملفات RIF الوهمية إلى ملفات RIF مجانية'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_rifRen()"> إعادة تسمية RIF </button>
+<button class="btn" onmouseover="msgs.innerHTML='تفعيل UART بشكل دائم لإصدار 9.00'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_permUart()"> UART دائم </button>
+<button class="btn" onmouseover="msgs.innerHTML='مطلوب لتفعيل الغش عبر موقع PS4 Trainer'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_webrte()"> WebRTE </button>
+<a href="http://ps4trainer.com/Trainer/index.html"><button class="btn btn-onln" onmouseover="msgs.innerHTML='موقع PS4 Trainer (اتبع التعليمات هناك)'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'"> موقع PS4 Trainer </button></a>
 <br>
-<button class="btn" onmouseover="msgs.innerHTML='Linux Loaders Menu'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="linux_group()" style="margin-left: 69px"> Linux Loaders </button>
-<button class="btn btn-onln" onmouseover="msgs.innerHTML='Games Mods (Hosted Online)'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="mods_group()"> Games-Mods (Online) </button>
-<button class="btn btn-toolbox" onmouseover="msgs.innerHTML='Orbis ToolBox Alpha 1190 for 9.00 FW'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_toolbox()"> Orbis-Toolbox </button>
-<button class="btn" onmouseover="msgs.innerHTML='Modify PS4 FAN Speed'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_fanthreshold()" style="margin-bottom: 70px"> Fan Threshold </button><select id="tempC"></select>°C
+<button class="btn" onmouseover="msgs.innerHTML='قائمة محمّلات Linux'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="linux_group()" style="margin-left: 69px"> محمّلات Linux </button>
+<button class="btn btn-onln" onmouseover="msgs.innerHTML='تعديلات الألعاب (مستضافة عبر الإنترنت)'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="mods_group()"> تعديلات الألعاب (عبر الإنترنت) </button>
+<button class="btn btn-toolbox" onmouseover="msgs.innerHTML='Orbis Toolbox Alpha 1190 لإصدار 9.00'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_toolbox()"> Orbis Toolbox </button>
+<button class="btn" onmouseover="msgs.innerHTML='تعديل سرعة مروحة PS4'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_fanthreshold()" style="margin-bottom: 70px"> حدّ حرارة المروحة </button><select id="tempC"></select>°C
 </div>
 <div id="lnx">
-<h1 style="font-size: 18px;color: yellow;">Linux Payloads</h1>
-<button class="btn" onmouseover="msgs.innerHTML='Identify the Southbridge of your Console for the Linux Installation'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_southbridge()"> Whos that Southbridge </button>
+<h1 style="font-size: 18px;color: yellow;">حمولات Linux</h1>
+<button class="btn" onmouseover="msgs.innerHTML='تعرّف على شريحة Southbridge في جهازك قبل تثبيت Linux'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_southbridge()"> ما نوع Southbridge؟ </button>
 <br>
-<button class="btn" onmouseover="msgs.innerHTML='Load Linux with 1GB VRAM (PSXita)'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_linux1gb()"> Linux 1GB </button>
-<button class="btn" onmouseover="msgs.innerHTML='Load Linux with 2GB VRAM (PSXita)'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_linux2gb()"> Linux 2GB </button>
-<button class="btn" onmouseover="msgs.innerHTML='Load Linux with 3GB VRAM (PSXita)'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_linux3gb()"> Linux 3GB </button>
-<button class="btn" onmouseover="msgs.innerHTML='Load Linux with 4GB VRAM (PSXita)'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_linux4gb()"> Linux 4GB </button>
+<button class="btn" onmouseover="msgs.innerHTML='تشغيل Linux بذاكرة VRAM سعة 1GB (PSXita)'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_linux1gb()"> Linux 1GB </button>
+<button class="btn" onmouseover="msgs.innerHTML='تشغيل Linux بذاكرة VRAM سعة 2GB (PSXita)'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_linux2gb()"> Linux 2GB </button>
+<button class="btn" onmouseover="msgs.innerHTML='تشغيل Linux بذاكرة VRAM سعة 3GB (PSXita)'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_linux3gb()"> Linux 3GB </button>
+<button class="btn" onmouseover="msgs.innerHTML='تشغيل Linux بذاكرة VRAM سعة 4GB (PSXita)'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_linux4gb()"> Linux 4GB </button>
 <br>
-<button class="btn" onmouseover="msgs.innerHTML='Load Linux for (PS4-Pro) with 1GB VRAM (PSXita)'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_linuxPS4Pro1gb()"> Linux 1GB (PS4-Pro) </button>
-<button class="btn" onmouseover="msgs.innerHTML='Load Linux for (PS4-Pro) with 2GB VRAM (PSXita)'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_linuxPS4Pro2gb()"> Linux 2GB (PS4-Pro) </button>
-<button class="btn" onmouseover="msgs.innerHTML='Load Linux for (PS4-Pro) with 3GB VRAM (PSXita)'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_linuxPS4Pro3gb()"> Linux 3GB (PS4-Pro) </button>
-<button class="btn" onmouseover="msgs.innerHTML='Load Linux for (PS4-Pro) with 4GB VRAM (PSXita)'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_linuxPS4Pro4gb()"> Linux 4GB (PS4-Pro) </button>
+<button class="btn" onmouseover="msgs.innerHTML='تشغيل Linux على PS4 Pro بذاكرة VRAM سعة 1GB'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_linuxPS4Pro1gb()"> Linux 1GB (PS4-Pro) </button>
+<button class="btn" onmouseover="msgs.innerHTML='تشغيل Linux على PS4 Pro بذاكرة VRAM سعة 2GB'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_linuxPS4Pro2gb()"> Linux 2GB (PS4-Pro) </button>
+<button class="btn" onmouseover="msgs.innerHTML='تشغيل Linux على PS4 Pro بذاكرة VRAM سعة 3GB'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_linuxPS4Pro3gb()"> Linux 3GB (PS4-Pro) </button>
+<button class="btn" onmouseover="msgs.innerHTML='تشغيل Linux على PS4 Pro بذاكرة VRAM سعة 4GB'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_linuxPS4Pro4gb()"> Linux 4GB (PS4-Pro) </button>
 <br>
-<button class="btn" onmouseover="msgs.innerHTML='Return to Main Menu'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_menu()" style="margin-bottom: 241px"> Return </button>
+<button class="btn" onmouseover="msgs.innerHTML='العودة إلى القائمة الرئيسية'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_menu()" style="margin-bottom: 241px"> رجوع </button>
 </div>
 <div id="mods">
-<h1 style="font-size: 18px;color: yellow;">Online Payloads</h1>
-<button class="btn" onmouseover="msgs.innerHTML='GTA V Mod - Arabic Guy v1.00 (L1 + R1)'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_arabicGuy100()"> Arabic Guy v1.00 </button>
-<button class="btn" onmouseover="msgs.innerHTML='GTA V Mod - Arabic Guy v1.27 (L1 + R1)'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_arabicGuy127()"> Arabic Guy v1.27 </button>
-<button class="btn" onmouseover="msgs.innerHTML='GTA V Mod - Arabic Guy v1.32 (L1 + R1)'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_arabicGuy132()"> Arabic Guy v1.32 </button>
-<button class="btn" onmouseover="msgs.innerHTML='GTA V Mod - Arabic Guy v1.33 (L1 + R1)'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_arabicGuy133()"> Arabic Guy v1.33 </button>
-<button class="btn" onmouseover="msgs.innerHTML='GTA V Mod - Expulsion v4.0 - 1.38'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_Expulsion()"> Expulsion v4.0 - 1.38 </button>
-<button class="btn" onmouseover="msgs.innerHTML='GTA V Mod - Lamance v0.9 - 1.38 (Right + Square)'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_Lamance()"> Lamance v0.9 - 1.38 </button>
+<h1 style="font-size: 18px;color: yellow;">حمولات عبر الإنترنت</h1>
+<button class="btn" onmouseover="msgs.innerHTML='تعديل GTA V: Arabic Guy v1.00 (L1 + R1)'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_arabicGuy100()"> Arabic Guy v1.00 </button>
+<button class="btn" onmouseover="msgs.innerHTML='تعديل GTA V: Arabic Guy v1.27 (L1 + R1)'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_arabicGuy127()"> Arabic Guy v1.27 </button>
+<button class="btn" onmouseover="msgs.innerHTML='تعديل GTA V: Arabic Guy v1.32 (L1 + R1)'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_arabicGuy132()"> Arabic Guy v1.32 </button>
+<button class="btn" onmouseover="msgs.innerHTML='تعديل GTA V: Arabic Guy v1.33 (L1 + R1)'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_arabicGuy133()"> Arabic Guy v1.33 </button>
+<button class="btn" onmouseover="msgs.innerHTML='تعديل GTA V: Expulsion v4.0 - 1.38'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_Expulsion()"> Expulsion v4.0 - 1.38 </button>
+<button class="btn" onmouseover="msgs.innerHTML='تعديل GTA V: Lamance v0.9 - 1.38 (يمين + مربع)'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_Lamance()"> Lamance v0.9 - 1.38 </button>
 <br>
-<button class="btn" onmouseover="msgs.innerHTML='GTA V Mod - WildeModz-1.32'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_WildeModz132()"> WildeModz-1.32 </button>
-<button class="btn" onmouseover="msgs.innerHTML='GTA V Mod - WildeModz-1.33'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_WildeModz133()"> WildeModz-1.33 </button>
-<button class="btn" onmouseover="msgs.innerHTML='GTA V Mod - WildeModz-1.38'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_WildeModz138()"> WildeModz-1.38 </button>
-<button class="btn" onmouseover="msgs.innerHTML='GTA V Mod - WildeModz-1.46'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_WildeModz146()"> WildeModz-1.46 </button>
-<button class="btn" onmouseover="msgs.innerHTML='GTA V Mod - WildeModz-1.47'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_WildeModz147()"> WildeModz-1.47 </button>
+<button class="btn" onmouseover="msgs.innerHTML='تعديل GTA V: WildeModz-1.32'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_WildeModz132()"> WildeModz-1.32 </button>
+<button class="btn" onmouseover="msgs.innerHTML='تعديل GTA V: WildeModz-1.33'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_WildeModz133()"> WildeModz-1.33 </button>
+<button class="btn" onmouseover="msgs.innerHTML='تعديل GTA V: WildeModz-1.38'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_WildeModz138()"> WildeModz-1.38 </button>
+<button class="btn" onmouseover="msgs.innerHTML='تعديل GTA V: WildeModz-1.46'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_WildeModz146()"> WildeModz-1.46 </button>
+<button class="btn" onmouseover="msgs.innerHTML='تعديل GTA V: WildeModz-1.47'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_WildeModz147()"> WildeModz-1.47 </button>
 <br>
-<button class="btn" onmouseover="msgs.innerHTML='GTA V Mod - Beef Queef Mod v1.33'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_beefQueef133()"> Beef Queef Mod v1.33 </button>
-<button class="btn" onmouseover="msgs.innerHTML='GTA V Mod - Beef Queef Mod v1.34'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_beefQueef134()"> Beef Queef Mod v1.34 </button>
-<button class="btn" onmouseover="msgs.innerHTML='GTA V Mod - Beef Queef Mod v1.38d'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_beefQueef138()"> Beef Queef Mod v1.38d </button>
-<button class="btn" onmouseover="msgs.innerHTML='GTA V Mod - Beef Queef Mod v1.47'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_beefQueef147()"> Beef Queef Mod v1.47 </button>
+<button class="btn" onmouseover="msgs.innerHTML='تعديل GTA V: Beef Queef Mod v1.33'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_beefQueef133()"> Beef Queef Mod v1.33 </button>
+<button class="btn" onmouseover="msgs.innerHTML='تعديل GTA V: Beef Queef Mod v1.34'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_beefQueef134()"> Beef Queef Mod v1.34 </button>
+<button class="btn" onmouseover="msgs.innerHTML='تعديل GTA V: Beef Queef Mod v1.38d'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_beefQueef138()"> Beef Queef Mod v1.38d </button>
+<button class="btn" onmouseover="msgs.innerHTML='تعديل GTA V: Beef Queef Mod v1.47'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_beefQueef147()"> Beef Queef Mod v1.47 </button>
 <br>
-<button class="btn" onmouseover="msgs.innerHTML='Red Dead Redemption 2 Mod - Oysters Menu v1.00'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_Oysters100()"> RDR2 v1.00 </button>
-<button class="btn" onmouseover="msgs.innerHTML='Red Dead Redemption 2 Mod - Oysters Menu v1.13'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_Oysters113()"> RDR2 v1.13 </button>
-<button class="btn" onmouseover="msgs.innerHTML='Red Dead Redemption 2 Mod - Oysters Menu v1.19'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_Oysters119()"> RDR2 v1.19 </button>
-<button class="btn" onmouseover="msgs.innerHTML='Red Dead Redemption 2 Mod - Oysters Menu v1.24'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_Oysters124()"> RDR2 v1.24 </button>
-<button class="btn" onmouseover="msgs.innerHTML='Red Dead Redemption 2 Mod - Oysters Menu v1.29'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_Oysters129()"> RDR2 v1.29 </button>
+<button class="btn" onmouseover="msgs.innerHTML='تعديل RDR2: Oysters Menu v1.00'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_Oysters100()"> RDR2 v1.00 </button>
+<button class="btn" onmouseover="msgs.innerHTML='تعديل RDR2: Oysters Menu v1.13'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_Oysters113()"> RDR2 v1.13 </button>
+<button class="btn" onmouseover="msgs.innerHTML='تعديل RDR2: Oysters Menu v1.19'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_Oysters119()"> RDR2 v1.19 </button>
+<button class="btn" onmouseover="msgs.innerHTML='تعديل RDR2: Oysters Menu v1.24'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_Oysters124()"> RDR2 v1.24 </button>
+<button class="btn" onmouseover="msgs.innerHTML='تعديل RDR2: Oysters Menu v1.29'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_Oysters129()"> RDR2 v1.29 </button>
 <br>
-<button class="btn" onmouseover="msgs.innerHTML='Return to Main Menu'" onmouseout="msgs.innerHTML='PS4 9.00 FW Host v3.0'" onclick="load_menu()" style="margin-bottom: 179px"> Return </button>
+<button class="btn" onmouseover="msgs.innerHTML='العودة إلى القائمة الرئيسية'" onmouseout="msgs.innerHTML='مضيف PS4 لإصدار 9.00 - النسخة 3.0'" onclick="load_menu()" style="margin-bottom: 179px"> رجوع </button>
 </div>
 <br>
-<h1 style="margin-top: 22px;">Special Thanks to:<a href="https://twitter.com/sleirsgoevy" style="color: #f31414;margin-left: 10px;margin-right: 10px;">@sleirsgoevy</a>ChendoChap<a href="https://twitter.com/Znullptr" style="color: #f31414;margin-left: 10px;margin-right: 10px;">@Znullptr</a>SiSTR0</h1>
+<h1 style="margin-top: 22px;">شكر خاص لـ:<a href="https://twitter.com/sleirsgoevy" style="color: #f31414;margin-left: 10px;margin-right: 10px;">@sleirsgoevy</a>ChendoChap<a href="https://twitter.com/Znullptr" style="color: #f31414;margin-left: 10px;margin-right: 10px;">@Znullptr</a>SiSTR0</h1>
 <script>
 function jbdone(){
 document.getElementById("menu").style.display = "block";
@@ -229,8 +230,8 @@ function load_binloader(){
         chain.fcall(libKernelBase.add32(OFFSET_lk_pthread_create), pthread, 0x0, payload_loader, payload_buffer);
     }
     chain.run();
-	LoadedMSG = "Bin Loader Launched ...";
-	alert("Waiting for Payload... Send it using the PS4 IP and port 9020");
+	LoadedMSG="تم تحميل محمّل الحمولات Launched ... بنجاح ✔";
+	alert("بانتظار الحمولة... أرسلها إلى عنوان IP الخاص بـ PS4 عبر المنفذ 9020");
 	allset();
 	}
 
@@ -252,7 +253,7 @@ for(var i=40; i<=75; i=i+5){
 tempC.value=60;
 
 function load_linux1gb(){
-msgs.innerHTML="Linux Loader 1GB Launched ...";
+msgs.innerHTML="تم تشغيل محمّل Linux بذاكرة 1GB";
 setTimeout(loadScript("netcat.js")
 +loadScript('malloc.js')
 +loadScript('rop2.js')
@@ -264,7 +265,7 @@ setTimeout(loadScript("netcat.js")
 }
 
 function load_linux2gb(){
-msgs.innerHTML="Linux Loader 2GB Launched ...";
+msgs.innerHTML="تم تشغيل محمّل Linux بذاكرة 2GB";
 setTimeout(loadScript("netcat.js")
 +loadScript('malloc.js')
 +loadScript('rop2.js')
@@ -276,7 +277,7 @@ setTimeout(loadScript("netcat.js")
 }
 
 function load_linux3gb(){
-msgs.innerHTML="Linux Loader 3GB Launched ...";
+msgs.innerHTML="تم تشغيل محمّل Linux بذاكرة 3GB";
 setTimeout(loadScript("netcat.js")
 +loadScript('malloc.js')
 +loadScript('rop2.js')
@@ -288,7 +289,7 @@ setTimeout(loadScript("netcat.js")
 }
 
 function load_linux4gb(){
-msgs.innerHTML="Linux Loader 4GB Launched ...";
+msgs.innerHTML="تم تشغيل محمّل Linux بذاكرة 4GB";
 setTimeout(loadScript("netcat.js")
 +loadScript('malloc.js')
 +loadScript('rop2.js')
@@ -300,7 +301,7 @@ setTimeout(loadScript("netcat.js")
 }
 
 function load_linuxPS4Pro1gb(){
-msgs.innerHTML="Linux Loader 1GB Launched ...";
+msgs.innerHTML="تم تشغيل محمّل Linux بذاكرة 1GB";
 setTimeout(loadScript("netcat.js")
 +loadScript('malloc.js')
 +loadScript('rop2.js')
@@ -312,7 +313,7 @@ setTimeout(loadScript("netcat.js")
 }
 
 function load_linuxPS4Pro2gb(){
-msgs.innerHTML="Linux Loader 2GB Launched ...";
+msgs.innerHTML="تم تشغيل محمّل Linux بذاكرة 2GB";
 setTimeout(loadScript("netcat.js")
 +loadScript('malloc.js')
 +loadScript('rop2.js')
@@ -324,7 +325,7 @@ setTimeout(loadScript("netcat.js")
 }
 
 function load_linuxPS4Pro3gb(){
-msgs.innerHTML="Linux Loader 3GB Launched ...";
+msgs.innerHTML="تم تشغيل محمّل Linux بذاكرة 3GB";
 setTimeout(loadScript("netcat.js")
 +loadScript('malloc.js')
 +loadScript('rop2.js')
@@ -336,7 +337,7 @@ setTimeout(loadScript("netcat.js")
 }
 
 function load_linuxPS4Pro4gb(){
-msgs.innerHTML="Linux Loader 4GB Launched ...";
+msgs.innerHTML="تم تشغيل محمّل Linux بذاكرة 4GB";
 setTimeout(loadScript("netcat.js")
 +loadScript('malloc.js')
 +loadScript('rop2.js')
@@ -348,271 +349,271 @@ setTimeout(loadScript("netcat.js")
 }
 
 function load_goldhenbeta(){
-LoadedMSG = "GoldHEN Loaded ...";
+LoadedMSG="تم تحميل تم تحميل GoldHEN بنجاح بنجاح ✔";
 PLfile = "goldhen.bin";
 load_poc();
 }
 
 function load_goldhen23(){
-LoadedMSG = "GoldHEN Loaded ...";
+LoadedMSG="تم تحميل تم تحميل GoldHEN بنجاح بنجاح ✔";
 PLfile = "goldhen.bin";
 load_poc();
 }
 
 function load_Gdumper(){
-LoadedMSG = "Game-Dumper Loaded ...";
+LoadedMSG="تم تحميل استخراج الألعاب بنجاح ✔";
 PLfile = "dumperG.bin";
 load_poc();
 }
 
 function load_Udumper(){
-LoadedMSG = "Update-Dumper Loaded ...";
+LoadedMSG="تم تحميل استخراج التحديثات بنجاح ✔";
 PLfile = "dumperU.bin";
 load_poc();
 }
 
 function load_SGUdumper(){
-LoadedMSG = "Separate Game and Update Dumper Loaded ...";
+LoadedMSG="تم تحميل Separate Game and Update Dumper بنجاح ✔";
 PLfile = "dumperSGU.bin";
 load_poc();
 }
 
 function load_MGUdumper(){
-LoadedMSG = "Merged Game and Update Dumper Loaded ...";
+LoadedMSG="تم تحميل Merged Game and Update Dumper بنجاح ✔";
 PLfile = "dumperMGU.bin";
 load_poc();
 }
 
 function load_todex(){
-LoadedMSG = "ToDex Loaded ...";
+LoadedMSG="تم تحميل ToDex بنجاح ✔";
 PLfile = "todex.bin";
 load_poc();
 }
 
 function load_ftp(){
-LoadedMSG = "FTP Loaded ..."
+LoadedMSG="تم تحميل FTP بنجاح ✔"
 PLfile = "ftp.bin";
 load_poc();
 }
 
 function load_app2usb(){
-LoadedMSG = "App2USB Loaded ..."
+LoadedMSG="تم تحميل App2USB بنجاح ✔"
 PLfile = "app2usb.bin";
 load_poc();
 }
 
 function load_dbackup(){
-LoadedMSG = "DB Backup Loaded ..."
+LoadedMSG="تم تحميل نسخ قاعدة البيانات احتياطياً بنجاح ✔"
 PLfile = "backup.bin";
 load_poc();
 }
 
 function load_dbrestore(){
-LoadedMSG = "DB Restore Loaded ..."
+LoadedMSG="تم تحميل استعادة قاعدة البيانات بنجاح ✔"
 PLfile = "restore.bin";
 load_poc();
 }
 
 function load_enablebUpdates(){
-LoadedMSG = "Enable Updates Loaded ..."
+LoadedMSG="تم تحميل تفعيل التحديثات بنجاح ✔"
 PLfile = "enable-updates.bin";
 load_poc();
 }
 
 function load_disableUpdates(){
-LoadedMSG = "Disable Updates Loaded ..."
+LoadedMSG="تم تحميل إيقاف التحديثات بنجاح ✔"
 PLfile = "disable-updates.bin";
 load_poc();
 }
 
 function load_historyBlocker(){
-LoadedMSG = "History Blocker Loaded ..."
+LoadedMSG="تم تحميل منع سجل التصفح بنجاح ✔"
 PLfile = "history-blocker.bin";
 load_poc();
 }
 
 function load_kernelDump(){
-LoadedMSG = "Kernel Dumper Loaded ..."
+LoadedMSG="تم تحميل استخراج النواة بنجاح ✔"
 PLfile = "kernel-dumper.bin";
 load_poc();
 }
 
 function load_moduleDump(){
-LoadedMSG = "Module Dumper Loaded ..."
+LoadedMSG="تم تحميل استخراج وحدات النواة بنجاح ✔"
 PLfile = "module-dumper.bin";
 load_poc();
 }
 
 function load_ps4debug(){
-LoadedMSG = "PS4 Debug Loaded ..."
+LoadedMSG="تم تحميل تصحيح PS4 بنجاح ✔"
 PLfile = "ps4debug.bin";
 load_poc();
 }
 
 function load_disbAslr(){
-LoadedMSG = "Disable ASLR Loaded ..."
+LoadedMSG="تم تحميل إيقاف ASLR بنجاح ✔"
 PLfile = "disable-aslr.bin";
 load_poc();
 }
 
 function load_exitidu(){
-LoadedMSG = "Exit IDU Loaded ..."
+LoadedMSG="تم تحميل الخروج من وضع IDU بنجاح ✔"
 PLfile = "exit-idu.bin";
 load_poc();
 }
 
 function load_rifRen(){
-LoadedMSG = "RIF Renamer Loaded ..."
+LoadedMSG="تم تحميل إعادة تسمية RIF بنجاح ✔"
 PLfile = "rif-renamer.bin";
 load_poc();
 }
 
 function load_permUart(){
-LoadedMSG = "Permanent UART Loaded ..."
+LoadedMSG="تم تحميل UART دائم بنجاح ✔"
 PLfile = "permanent-uart.bin";
 load_poc();
 }
 
 function load_webrte(){
-LoadedMSG = "WebRTE Loaded ..."
+LoadedMSG="تم تحميل WebRTE بنجاح ✔"
 PLfile = "webrte.bin";
 load_poc();
 }
 
 function load_toolbox(){
-LoadedMSG = "Orbis-Toolbox Loaded ..."
-PLfile = "Orbis-Toolbox-900.bin";
+LoadedMSG="تم تحميل Orbis Toolbox بنجاح ✔"
+PLfile = "Orbis Toolbox-900.bin";
 load_poc();
 }
 
 function load_fanthreshold(){
-LoadedMSG="Fan Threshold Loaded ..."
+LoadedMSG="تم تحميل حدّ حرارة المروحة بنجاح ✔"
 PLfile = "fan-threshold"+tempC.value+".bin";
 load_poc();
 }
 
 function load_southbridge(){
-LoadedMSG = "Payload Loaded ..."
+LoadedMSG="تم تحميل Payload بنجاح ✔"
 PLfile = "southbridge.bin";
 load_poc();
 }
 
 function load_arabicGuy100(){
-LoadedMSG = "Arabic Guy v1.00 Loaded ..."
+LoadedMSG="تم تحميل Arabic Guy v1.00 بنجاح ✔"
 PLfile = "arabic-guy100.bin";
 load_poc();
 }
 
 function load_arabicGuy127(){
-LoadedMSG = "Arabic Guy v1.27 Loaded ..."
+LoadedMSG="تم تحميل Arabic Guy v1.27 بنجاح ✔"
 PLfile = "arabic-guy127.bin";
 load_poc();
 }
 
 function load_arabicGuy132(){
-LoadedMSG = "Arabic Guy v1.32 Loaded ..."
+LoadedMSG="تم تحميل Arabic Guy v1.32 بنجاح ✔"
 PLfile = "arabic-guy132.bin";
 load_poc();
 }
 
 function load_arabicGuy133(){
-LoadedMSG = "Arabic Guy v1.33 Loaded ..."
+LoadedMSG="تم تحميل Arabic Guy v1.33 بنجاح ✔"
 PLfile = "arabic-guy133.bin";
 load_poc();
 }
 
 function load_Expulsion(){
-LoadedMSG = "Expulsion v4.0 Loaded ..."
+LoadedMSG="تم تحميل Expulsion v4.0 بنجاح ✔"
 PLfile = "Expulsion-V4.0-1.38.bin";
 load_poc();
 }
 
 function load_Lamance(){
-LoadedMSG = "Lamance v0.9 Loaded ..."
+LoadedMSG="تم تحميل Lamance v0.9 بنجاح ✔"
 PLfile = "Lamance-v0.9-1.38.bin";
 load_poc();
 }
 
 function load_WildeModz132(){
-LoadedMSG = "WildeModz-1.32 Loaded ..."
+LoadedMSG="تم تحميل WildeModz-1.32 بنجاح ✔"
 PLfile = "WildeModz-1.32.bin";
 load_poc();
 }
 
 function load_WildeModz133(){
-LoadedMSG = "WildeModz-1.33 Loaded ..."
+LoadedMSG="تم تحميل WildeModz-1.33 بنجاح ✔"
 PLfile = "WildeModz-1.33.bin";
 load_poc();
 }
 
 function load_WildeModz138(){
-LoadedMSG = "WildeModz-1.38 Loaded ..."
+LoadedMSG="تم تحميل WildeModz-1.38 بنجاح ✔"
 PLfile = "WildeModz-1.38.bin";
 load_poc();
 }
 
 function load_WildeModz146(){
-LoadedMSG = "WildeModz-1.46 Loaded ..."
+LoadedMSG="تم تحميل WildeModz-1.46 بنجاح ✔"
 PLfile = "WildeModz-1.46.bin";
 load_poc();
 }
 
 function load_WildeModz147(){
-LoadedMSG = "WildeModz-1.47 Loaded ..."
+LoadedMSG="تم تحميل WildeModz-1.47 بنجاح ✔"
 PLfile = "WildeModz-1.47.bin";
 load_poc();
 }
 
 function load_beefQueef133(){
-LoadedMSG = "Beef Queef Mod v1.33 Loaded ..."
+LoadedMSG="تم تحميل Beef Queef Mod v1.33 بنجاح ✔"
 PLfile = "BeefQueefMod-133.bin";
 load_poc();
 }
 
 function load_beefQueef134(){
-LoadedMSG = "Beef Queef Mod v1.34 Loaded ..."
+LoadedMSG="تم تحميل Beef Queef Mod v1.34 بنجاح ✔"
 PLfile = "BeefQueefMod-134.bin";
 load_poc();
 }
 
 function load_beefQueef138(){
-LoadedMSG = "Beef Queef Mod v1.38d Loaded ..."
+LoadedMSG="تم تحميل Beef Queef Mod v1.38d بنجاح ✔"
 PLfile = "BeefQueefMod-138d.bin";
 load_poc();
 }
 
 function load_beefQueef147(){
-LoadedMSG = "Beef Queef Mod v1.47 Loaded ..."
+LoadedMSG="تم تحميل Beef Queef Mod v1.47 بنجاح ✔"
 PLfile = "BeefQueefMod-Unified-147e.bin";
 load_poc();
 }
 
 function load_Oysters100(){
-LoadedMSG = "Oysters Menu v1.00 Loaded ..."
+LoadedMSG="تم تحميل Oysters Menu v1.00 بنجاح ✔"
 PLfile = "OystersMenu-v1.00.bin";
 load_poc();
 }
 
 function load_Oysters113(){
-LoadedMSG = "Oysters Menu v1.13 Loaded ..."
+LoadedMSG="تم تحميل Oysters Menu v1.13 بنجاح ✔"
 PLfile = "OystersMenu-v1.13.bin";
 load_poc();
 }
 
 function load_Oysters119(){
-LoadedMSG = "Oysters Menu v1.19 Loaded ..."
+LoadedMSG="تم تحميل Oysters Menu v1.19 بنجاح ✔"
 PLfile = "OystersMenu-v1.19.bin";
 load_poc();
 }
 
 function load_Oysters124(){
-LoadedMSG = "Oysters Menu v1.24 Loaded ..."
+LoadedMSG="تم تحميل Oysters Menu v1.24 بنجاح ✔"
 PLfile = "OystersMenu-v1.24.bin";
 load_poc();
 }
 
 function load_Oysters129(){
-LoadedMSG = "Oysters Menu v1.29 Loaded ..."
+LoadedMSG="تم تحميل Oysters Menu v1.29 بنجاح ✔"
 PLfile = "OystersMenu-v1.29.bin";
 load_poc();
 }

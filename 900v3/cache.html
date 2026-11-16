@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html manifest="cache.manifest">
+<html lang="ar" dir="rtl" manifest="cache.manifest">
 <head>
-<title>PS4 9.00 FW Host v3.0 | Automatic Exploitation</title>
+<meta charset="UTF-8">
+<title>مضيف PS4 لإصدار 9.00 - النسخة 3.0 (تشغيل تلقائي)</title>
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 <script>
 history.replaceState(null,null,'index.html');var histlength=history.length;history.go(-histlength);
-function DLProgress(e){Percent=(Math.round(e.loaded / e.total * 100));setTimeout(function(){window.msgs.innerHTML="Installing Offline Cache: " + Percent + "%";},500)}
-function DisplayCacheProgress(){setTimeout(function(){window.msgs.innerHTML="Cache Installed Successfully ✔";},1500);setTimeout(function(){window.msgs.innerHTML="Now Close And Re-Open Your Browser ...";},3500);}window.applicationCache.addEventListener("progress",DLProgress,false);window.applicationCache.oncached=function(e){DisplayCacheProgress();};function ActivateCacheUpdate(){try{window.applicationCache.swapCache();}catch(e){window.msgs.innerHTML="Cache downloaded but activation failed. Close and re-open the browser, then retry.";return;}DisplayCacheProgress();}window.applicationCache.onupdateready=ActivateCacheUpdate;if(window.applicationCache.status==window.applicationCache.UPDATEREADY)ActivateCacheUpdate();window.applicationCache.onerror=function(){window.msgs.innerHTML="Cache update failed. The previous cache is still active. Check the connection and retry.";};
+function DLProgress(e){Percent=(Math.round(e.loaded / e.total * 100));setTimeout(function(){window.msgs.innerHTML="جارٍ تثبيت التخزين المؤقت: " + Percent + "%";},500)}
+function DisplayCacheProgress(){setTimeout(function(){window.msgs.innerHTML="تم تثبيت التخزين المؤقت بنجاح ✔";},1500);setTimeout(function(){window.msgs.innerHTML="أغلق المتصفح ثم افتحه مجدداً...";},3500);}window.applicationCache.addEventListener("progress",DLProgress,false);window.applicationCache.oncached=function(e){DisplayCacheProgress();};function ActivateCacheUpdate(){try{window.applicationCache.swapCache();}catch(e){window.msgs.innerHTML="تم تنزيل التخزين المؤقت لكن تعذّر تفعيله. أغلق المتصفح وافتحه ثم حاول مجدداً.";return;}DisplayCacheProgress();}window.applicationCache.onupdateready=ActivateCacheUpdate;if(window.applicationCache.status==window.applicationCache.UPDATEREADY)ActivateCacheUpdate();window.applicationCache.onerror=function(){window.msgs.innerHTML="تعذّر تحديث التخزين المؤقت. ما زالت النسخة السابقة تعمل. تحقق من الاتصال ثم حاول مجدداً.";};
 </script>
-<h1>PS4 9.00 FW Host v3.0</h1>
+<h1>مضيف PS4 لإصدار 9.00 - النسخة 3.0</h1>
 <hr>
 <br>
-<h1 id="msgs" style="font-size: 30px;margin-top: 77px;margin-bottom: 455px;">Wait a Moment...</h1>
-<h1 style="margin-top: 43px;">Special Thanks to:<a href="https://twitter.com/sleirsgoevy" style="color: #f31414;margin-left: 10px;margin-right: 10px;">@sleirsgoevy</a>ChendoChap<a href="https://twitter.com/Znullptr" style="color: #f31414;margin-left: 10px;margin-right: 10px;">@Znullptr</a>SiSTR0</h1>
+<h1 id="msgs" style="font-size: 30px;margin-top: 77px;margin-bottom: 455px;">لحظة من فضلك...</h1>
+<h1 style="margin-top: 43px;">شكر خاص لـ:<a href="https://twitter.com/sleirsgoevy" style="color: #f31414;margin-left: 10px;margin-right: 10px;">@sleirsgoevy</a>ChendoChap<a href="https://twitter.com/Znullptr" style="color: #f31414;margin-left: 10px;margin-right: 10px;">@Znullptr</a>SiSTR0</h1>
 </body>
 </html>

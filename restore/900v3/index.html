@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar" dir="rtl">
 <head>
-<title>PS4 Restore Host for 9.00 FW</title>
+<meta charset="UTF-8">
+<title>دليل استعادة مضيف PS4 لإصدار 9.00</title>
 <link rel="stylesheet" href="../../style.css">
 <script src="int64.js"></script>
 <script src="rop.js"></script>
@@ -9,11 +10,11 @@
 <script src="webkit.js"></script>
 </head>
 <body onload="setTimeout(poc, 50);">
-<h1>PS4 Restore Host for 9.00 FW</h1>
+<h1>دليل استعادة مضيف PS4 لإصدار 9.00</h1>
 <hr>
 <br>
-<h1 id="msgs" style="font-size: 30px;margin-top: 77px;margin-bottom: 455px;">Loading Payload... Please Wait</h1>
-<h1 style="margin-top: 43px;">A special thanks to all the devs on the scene.</h1>
+<h1 id="msgs" style="font-size: 30px;margin-top: 77px;margin-bottom: 455px;">جارٍ تحميل الحمولة... يرجى الانتظار</h1>
+<h1 style="margin-top: 43px;">شكراً لكل المطورين في مجتمع PS4.</h1>
 <script>
 function allset(){
 msgs.innerHTML = LoadedMSG
@@ -43,7 +44,7 @@ function load_poc(){
 }
 
 function jbdone(){
-LoadedMSG = "Payload Loaded ...";
+LoadedMSG="تم تحميل Payload بنجاح ✔";
 PLfile = "payload.bin";
 setTimeout(load_poc, 500);
 }

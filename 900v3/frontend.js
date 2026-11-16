@@ -168,7 +168,7 @@ function activateAccount(idx)
         var digit = parseInt(acc_id[2*i], 16) * 16 + parseInt(acc_id[2*i+1], 16);
         if(digit != digit)
         {
-            alert("Must be 16 characters long and only contain [0-9A-F]");
+            alert("يجب أن يتكوّن المعرّف من 16 خانة، وأن يحتوي على الأرقام من 0 إلى 9 والحروف من A إلى F فقط.");
             return;
         }
         binary_id.push(digit);
@@ -178,7 +178,7 @@ function activateAccount(idx)
     call_native();
     fetchAccounts();
     if(ui[idx].id.value == acc_id.toUpperCase())
-        alert("PSN ID set successfully!");
+        alert("تم ضبط معرّف PSN بنجاح!");
     return false;
 }
 

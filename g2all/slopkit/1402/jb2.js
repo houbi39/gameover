@@ -32,22 +32,22 @@ const params = new URLSearchParams(location.search);
 
 function hostOk() {
   var m = document.getElementById("msgs") || document.getElementById("msg");
-  if (m) m.innerHTML = "GoldHEN v2.4b18.14 Loaded ...";
+  if (m) m.innerHTML = "تم تحميل GoldHEN v2.4b18.14 بنجاح";
 }
 function hostFail() {
   var m = document.getElementById("msgs") || document.getElementById("msg");
   if (m) {
-    m.innerHTML = "Failed to Load! Restart Your Console ...";
+    m.innerHTML = "تعذّر التحميل. أعد تشغيل الجهاز ثم حاول مجدداً.";
     m.style.color = "yellow";
   }
 }
 function hostAlready() {
   var m = document.getElementById("msgs") || document.getElementById("msg");
-  if (m) m.innerHTML = "GoldHEN is Already Loaded ...";
+  if (m) m.innerHTML = "GoldHEN يعمل بالفعل";
 }
 function hostRetry() {
   var m = document.getElementById("msgs") || document.getElementById("msg");
-  if (m) m.innerHTML = "Failed to Load! Reopen the Browser ...";
+  if (m) m.innerHTML = "تعذّر التحميل. أغلق المتصفح وافتحه مجدداً ثم حاول.";
 }
 
 /* The retry notice. Two things lead here: the chain throws, or it stalls
@@ -406,7 +406,7 @@ let mainMf = null,
         document.body.classList.add("log");
       } catch (e) {}
 
-      state("not a PS4 browser - debug mode", "warn");
+      state("هذا ليس متصفح PS4 - وضع الفحص", "warn");
 
       mark(
         "NONPS4-DEBUG",
@@ -489,7 +489,7 @@ let mainMf = null,
     if (params.get("afterglow") && SUPPORTED.indexOf(fwKey) < 0) {
       mark("FW-UNSUPPORTED", fwKey + " -- this build has a kernel stage for "
            + SUPPORTED.join(", ") + " only");
-      state("firmware " + fwKey + " is not supported", "fail");
+      state("إصدار النظام " + fwKey + " غير مدعوم", "fail");
       showNotice(
         "This build has a kernel stage for firmware " + SUPPORTED.join(", ") +
         " only. Detected " + fwKey + " - nothing was run.",
@@ -498,7 +498,7 @@ let mainMf = null,
       return;
     }
 
-    // How many tries the WebKit stage gets. An attempt costs nothing in the
+    // How many tries the WebKit stage gets. An المحاولة costs nothing in the
     // kernel -- this stage is a userland UAF in JavaScript, and a miss is
     // simply repeated. About one in three lands, so a low ceiling gives up on
     // a page that would have worked; this one puts that failure well under a
@@ -508,7 +508,7 @@ let mainMf = null,
     const PRIMITIVE_ONLY = params.get("stop") === "primitive";
 
     if (PRIMITIVE_ONLY) {
-      state("testing WebKit primitive...", "warn");
+      state("جارٍ اختبار مكوّن WebKit...", "warn");
 
       await new Promise(function (resolve) {
         setTimeout(resolve, 0);
@@ -523,7 +523,7 @@ let mainMf = null,
 
           writer(
             tag,
-            (attempt != null ? "[" + attempt + "] " : "") +
+            (المحاولة != null ? "[" + المحاولة + "] " : "") +
               (detail || ""),
           );
         },
@@ -679,7 +679,7 @@ let mainMf = null,
     );
 
 
-    state("running the primitive...", "warn");
+    state("جارٍ تشغيل مكوّن الاستغلال...", "warn");
     await new Promise((r) => setTimeout(r, 0));
 
     const PRIMITIVE_LOUD = /FAIL|ERROR|THREW|RETRY|ABORT|PASS/i;

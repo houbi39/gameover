@@ -36,14 +36,14 @@ const params = new URLSearchParams(location.search);
 function hostOk() {
   var m = document.getElementById("msgs");
   if (m) {
-    m.innerHTML = "GoldHEN v2.4b18.13 Loaded ...";
+    m.innerHTML = "تم تحميل GoldHEN v2.4b18.13 بنجاح";
   }
 }
 
 function hostFail() {
   var m = document.getElementById("msgs");
   if (m) {
-    m.innerHTML = "Failed to Load! Restart Your Console ...";
+    m.innerHTML = "تعذّر التحميل. أعد تشغيل الجهاز ثم حاول مجدداً.";
     m.style.color = "yellow";
   }
 }
@@ -51,14 +51,14 @@ function hostFail() {
 function hostAlready() {
   var m = document.getElementById("msgs");
   if (m) {
-    m.innerHTML = "GoldHEN is Already Loaded ...";
+    m.innerHTML = "GoldHEN يعمل بالفعل";
   }
 }
 
 function hostRetry() {
   var m = document.getElementById("msgs");
   if (m) {
-    m.innerHTML = "Failed to Load! Reopen the Browser ...";
+    m.innerHTML = "تعذّر التحميل. أغلق المتصفح وافتحه مجدداً ثم حاول.";
   }
 }
 
@@ -427,7 +427,7 @@ let allDone = false,
         document.body.classList.add("log");
       } catch (e) {}
 
-      state("not a PS4 browser - debug mode", "warn");
+      state("هذا ليس متصفح PS4 - وضع الفحص", "warn");
 
       mark(
         "NONPS4-DEBUG",
@@ -486,7 +486,7 @@ let allDone = false,
     }
     const fwKey = key || "unknown";
 
-    // How many tries the WebKit stage gets. An attempt costs nothing in the
+    // How many tries the WebKit stage gets. An المحاولة costs nothing in the
     // kernel -- this stage is a userland UAF in JavaScript, and a miss is
     // simply repeated. About one in three lands, so a low ceiling gives up on
     // a page that would have worked; this one puts that failure well under a
@@ -496,7 +496,7 @@ let allDone = false,
     const PRIMITIVE_ONLY = params.get("stop") === "primitive";
 
     if (PRIMITIVE_ONLY) {
-      state("testing WebKit primitive...", "warn");
+      state("جارٍ اختبار مكوّن WebKit...", "warn");
 
       await new Promise(function (resolve) {
         setTimeout(resolve, 0);
@@ -511,7 +511,7 @@ let allDone = false,
 
           writer(
             tag,
-            (attempt != null ? "[" + attempt + "] " : "") +
+            (المحاولة != null ? "[" + المحاولة + "] " : "") +
               (detail || ""),
           );
         },
@@ -732,7 +732,7 @@ let allDone = false,
     if (retryCount() > 0)
       mark("AUTO-RELOAD-RESUME", "reload=" + retryCount() + "/" + RETRY_MAX);
 
-    state("running the primitive...", "warn");
+    state("جارٍ تشغيل مكوّن الاستغلال...", "warn");
     await new Promise((r) => setTimeout(r, 0));
 
     const PRIMITIVE_LOUD = /FAIL|ERROR|THREW|RETRY|ABORT|PASS/i;
@@ -1149,7 +1149,7 @@ let allDone = false,
           agOk = !!(probed && probed.ok);
         } else {
           // Set before entering the kernel stage: an exception may occur
-          // after the attempt has begun and must not be reported as a harmless
+          // after the المحاولة has begun and must not be reported as a harmless
           // WebKit-only miss.
           agRan = true;
           const res = await ag.runAfterglow(agCtx);

