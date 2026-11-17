@@ -38,14 +38,14 @@ body:before{display:none}
   background:rgba(255,255,255,.08);
   border:1px solid rgba(255,255,255,.16);
   color:#cfe3ff;
-  font-size:11px;
+  font-size:12px;
   font-weight:600;
   letter-spacing:4px;
 }
 
 .hero h1{
   margin:20px 0 8px;
-  font-size:54px;
+  font-size:58px;
   font-weight:800;
   line-height:1.05;
   letter-spacing:-1px;
@@ -62,7 +62,7 @@ body:before{display:none}
 .subtitle{
   margin:10px 0 0;
   color:#9db4d6;
-  font-size:16px;
+  font-size:18px;
   font-weight:400;
   letter-spacing:.3px;
 }
@@ -88,7 +88,7 @@ body:before{display:none}
   justify-content:flex-start;
   margin:0 4px 20px;
   color:#8da2c4;
-  font-size:12px;
+  font-size:14px;
   font-weight:700;
   text-transform:uppercase;
   letter-spacing:3px;
@@ -130,7 +130,7 @@ body:before{display:none}
   background:rgba(255,255,255,.06);
   color:#fff;
   font-family:inherit;
-  font-size:17px;
+  font-size:19px;
   font-weight:600;
   letter-spacing:.2px;
   text-align:right;
@@ -163,7 +163,7 @@ body:before{display:none}
 .button-grid > .btn-multi{
   grid-column:1 / -1;
   min-height:92px;
-  font-size:20px;
+  font-size:22px;
   background:-webkit-linear-gradient(135deg,rgba(255,196,60,.30),rgba(255,140,0,.10));
   background:linear-gradient(135deg,rgba(255,196,60,.30),rgba(255,140,0,.10));
   border-color:rgba(255,210,100,.55);
@@ -208,7 +208,7 @@ body:before{display:none}
   padding-top:18px;
   border-top:1px solid rgba(255,255,255,.08);
   color:#6f84a6;
-  font-size:13px;
+  font-size:14px;
   line-height:1.7;
   text-align:center;
 }
@@ -220,20 +220,20 @@ body:before{display:none}
 #menu.is-hidden{display:none}
 .donation{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:760px;margin:0 auto 22px}
 .coin{padding:20px;text-align:center;border:1px solid rgba(255,255,255,.12);border-radius:20px;background:rgba(0,0,0,.3)}
-.coin h2{margin:0 0 15px;font-size:16px}
+.coin h2{margin:0 0 15px;font-size:17px}
 .coin img{display:block;width:150px;height:150px;max-width:100%;margin:0 auto 15px;border-radius:12px}
-.coin code{display:block;color:#cdefff;font-size:11px;line-height:1.5;word-break:break-all}
+.coin code{display:block;color:#cdefff;font-size:12px;line-height:1.5;word-break:break-all}
 .btn-return{display:block;max-width:300px;margin:0 auto}
 
 /* ---------- Responsive ---------- */
 @media (max-width:560px){
   html{background-attachment:scroll}
   .page{padding-top:32px}
-  .hero h1{font-size:38px}
-  .subtitle{font-size:14px}
+  .hero h1{font-size:40px}
+  .subtitle{font-size:16px}
   .panel{padding:18px 14px;border-radius:24px}
   .button-grid{grid-template-columns:1fr;gap:10px}
-  .btn{min-height:68px;font-size:16px}
+  .btn{min-height:72px;font-size:18px}
   .donation{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion:reduce){
