@@ -11,6 +11,7 @@ on:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
+  actions: read
   contents: read
   pages: write
   id-token: write
@@ -52,6 +53,29 @@ jobs:
         with:
           # Upload entire repository
           path: '.'
+      - name: Wait for Pages artifact to become available
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          artifact_url="${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/artifacts?name=github-pages"
+          for attempt in $(seq 1 12); do
+            response="$(curl --silent --show-error --fail \
+              -H "Authorization: Bearer ${GH_TOKEN}" \
+              -H "Accept: application/vnd.github+json" \
+              "${artifact_url}")" || {
+                echo "Artifact API not ready (attempt ${attempt}/12)."
+                sleep 5
+                continue
+              }
+            if jq -e '.artifacts | any(.[]; .name == "github-pages" and .expired == false)' <<< "${response}" >/dev/null; then
+              echo "The github-pages artifact is visible and ready."
+              exit 0
+            fi
+            echo "Waiting for github-pages artifact indexing (attempt ${attempt}/12)."
+            sleep 5
+          done
+          echo "The github-pages artifact did not become visible within 60 seconds." >&2
+          exit 1
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
