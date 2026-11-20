@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# GAMEOVER-CACHE-VERSION: 836bd75afc1945b4825c756f052c2343ff144c4adf793cc22ebd36dff0fe71a8
+# GAMEOVER-CACHE-VERSION: 8569b4baaad482655c2e9cfc96b9efdb14cc1f37532f5b1ecaa414ca5ad293e9
 # GameOver 14.02 chain cache refresh
 # GoldHEN payload: Telegram Desktop user-modified build SHA256 7d1d13a86ea4a140564bf0efb1c0b6df0ff34d7071c2b5c117678fc43d5281b5
 
@@ -8,6 +8,7 @@ CACHE:
 ../style.css
 goldhen.bin
 index.html
+cacheslopkit.html
 slopkit\chain_lapse.js
 slopkit\patches\1400.bin
 slopkit\jb2.js

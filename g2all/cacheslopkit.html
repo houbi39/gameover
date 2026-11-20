@@ -7,13 +7,19 @@
 </head>
 <body>
 <script>
-history.replaceState(null,null,'index.html');var histlength=history.length;history.go(-histlength);
-function DLProgress(e){Percent=(Math.round(e.loaded / e.total * 100));window.msgs.innerHTML="جارٍ تثبيت التخزين المؤقت: " + Percent + "%";}
-function DisplayCacheProgress(){window.msgs.innerHTML="تم تثبيت التخزين المؤقت بنجاح ✔";setTimeout(function(){window.msgs.innerHTML="أغلق المتصفح ثم افتحه مجدداً...";},1500);}
-window.applicationCache.addEventListener("progress",DLProgress,false);
-window.applicationCache.oncached=function(e){DisplayCacheProgress();};
-function ActivateCacheUpdate(){try{window.applicationCache.swapCache();}catch(e){window.msgs.innerHTML="تم تنزيل التخزين المؤقت لكن تعذّر تفعيله. أغلق المتصفح وافتحه ثم حاول مجدداً.";return;}DisplayCacheProgress();}window.applicationCache.onupdateready=ActivateCacheUpdate;if(window.applicationCache.status==window.applicationCache.UPDATEREADY)ActivateCacheUpdate();
-window.applicationCache.onerror=function(e){window.msgs.innerHTML="تعذّر تحديث التخزين المؤقت. ما زالت النسخة السابقة تعمل. تحقق من الاتصال ثم حاول مجدداً.";};
+var cache=window.applicationCache;
+var returnStarted=false;
+function SetMessage(message){var target=document.getElementById("msgs");if(target)target.innerHTML=message;}
+function DLProgress(e){var percent=Math.round(e.loaded/e.total*100);SetMessage("جارٍ تثبيت التخزين المؤقت: "+percent+"%");}
+function ReturnToHost(){if(returnStarted)return;returnStarted=true;SetMessage("اكتمل التخزين المؤقت. جارٍ فتح المضيف...");window.location.replace("index.html");}
+function ActivateCacheUpdate(){try{cache.swapCache();}catch(e){SetMessage("تم تنزيل التخزين المؤقت لكن تعذّر تفعيله. تحقق من الاتصال ثم حاول مجدداً.");return;}ReturnToHost();}
+function CacheError(){SetMessage("تعذّر تحديث التخزين المؤقت. ما زالت النسخة السابقة تعمل. تحقق من الاتصال ثم حاول مجدداً.");}
+cache.addEventListener("progress",DLProgress,false);
+cache.addEventListener("cached",ReturnToHost,false);
+cache.addEventListener("noupdate",ReturnToHost,false);
+cache.addEventListener("updateready",ActivateCacheUpdate,false);
+cache.addEventListener("error",CacheError,false);
+if(cache.status==cache.UPDATEREADY)ActivateCacheUpdate();
 </script>
 <h1>مضيف GoldHEN لإصدارات PS4 من 5.05 إلى 14.02 هوبي</h1>
 <hr>
