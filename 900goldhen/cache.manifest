@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# GAMEOVER-CACHE-VERSION: 7e4239f51de9b0487f2cb8b1e34c55f086b4e2141bd45b8b6b73840d274324e1
+# GAMEOVER-CACHE-VERSION: 49298d31e9cd2d789e71dde92ae87a26056d0582a5458ea7312c485115bb0203
 # GoldHEN payload refresh 2026-11-13 SHA256 e4157533ef7a7e220c5febf59d7e6e3eb2c70f97009f1fa6d4e7bec42b4cbddc
 
 CACHE:
@@ -12,7 +12,3 @@ int64.js
 kexploit.js
 rop.js
 webkit.js
-
-NETWORK:
-https://static.cloudflareinsights.com/beacon.min.js
-https://cloudflareinsights.com/cdn-cgi/rum
