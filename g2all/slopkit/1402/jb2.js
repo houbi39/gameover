@@ -523,7 +523,7 @@ let mainMf = null,
 
           writer(
             tag,
-            (المحاولة != null ? "[" + المحاولة + "] " : "") +
+            (attempt != null ? "[" + attempt + "] " : "") +
               (detail || ""),
           );
         },
